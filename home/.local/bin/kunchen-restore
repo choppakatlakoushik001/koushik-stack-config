@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# kunchen-restore — fired by a tmux client-attached hook, so it runs with a
+# real client present. tmux-resurrect refuses to restore without one
+# ("no current client"), which is why this cannot be done before attaching.
+#
+# Outcome either way: you end up in a working `kunchen` session. If the
+# restore produces one, you get your old windows back; if not, you get the
+# standard layout. It never leaves you sitting in the bootstrap session.
+
+set -uo pipefail
+
+SESSION="${KUNCHEN_SESSION:-kunchen}"
+BOOTSTRAP="_kunchen_boot"
+RESTORE_SH="$HOME/.tmux/plugins/tmux-resurrect/scripts/restore.sh"
+LOG="$HOME/.local/state/kunchen-restore.log"
+mkdir -p "$(dirname "$LOG")"
+
+# One-shot: never fire again this server lifetime.
+tmux set-hook -gu client-attached 2>/dev/null
+
+{
+  echo "--- $(date -Is) restore attempt ---"
+
+  if [ -x "$RESTORE_SH" ]; then
+    "$RESTORE_SH" 2>&1 | tail -5
+  else
+    echo "restore.sh missing"
+  fi
+
+  for _ in $(seq 1 30); do            # up to ~6s
+    tmux has-session -t "=$SESSION" 2>/dev/null && break
+    sleep 0.2
+  done
+
+  if tmux has-session -t "=$SESSION" 2>/dev/null; then
+    echo "restored: $(tmux list-windows -t "$SESSION" -F '#{window_name}' | tr '\n' ' ')"
+  else
+    echo "restore produced nothing; building default layout"
+    KUNCHEN_BUILD_ONLY=1 "$HOME/.local/bin/kunchen-session" >/dev/null 2>&1
+  fi
+
+  tmux switch-client -t "$SESSION" 2>/dev/null
+  tmux kill-session -t "=$BOOTSTRAP" 2>/dev/null
+  echo "done"
+} >>"$LOG" 2>&1

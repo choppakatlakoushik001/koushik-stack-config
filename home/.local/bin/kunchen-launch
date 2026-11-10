@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# kunchen-launch — what the Alacritty shortcut actually runs.
+#
+# Exists for one reason: when the terminal "flashes and closes" there is no
+# way to read the error. This records the environment and the failure, and
+# holds the window open so you can see it.
+
+# Invoked directly by wsl.exe (not via `bash -lc`), so .bashrc has not run.
+# Set up PATH explicitly rather than relying on a login shell — that removes
+# the need for any quoted argument on the Windows side, which is what broke
+# the previous launcher.
+export PATH="$HOME/.local/bin:$HOME/.npm-global/bin:$HOME/go/bin:/usr/local/bin:/usr/bin:/bin"
+export TERM="${TERM:-xterm-256color}"
+
+LOG="$HOME/.local/state/kunchen-launch.log"
+mkdir -p "$(dirname "$LOG")"
+
+{
+  echo "--- $(date -Is) launch ---"
+  echo "tty        : $(tty 2>&1)"
+  echo "TERM       : ${TERM:-unset}"
+  echo "stdin tty  : $([ -t 0 ] && echo yes || echo NO)"
+  echo "stdout tty : $([ -t 1 ] && echo yes || echo NO)"
+  echo "stderr tty : $([ -t 2 ] && echo yes || echo NO)"
+  echo "cwd        : $(pwd)"
+  echo "sessions   : $(tmux ls 2>&1 | tr '\n' '; ')"
+} >>"$LOG" 2>&1
+
+# Run the real entry point, tee-ing stderr into the log.
+~/.local/bin/kunchen-session 2> >(tee -a "$LOG" >&2)
+rc=$?
+
+{
+  echo "kunchen-session returned rc=$rc"
+  echo
+} >>"$LOG" 2>&1
+
+if [ "$rc" -ne 0 ]; then
+  echo
+  echo "  Launch failed (rc=$rc)."
+  echo "  Log: ~/.local/state/kunchen-launch.log"
+  echo
+  echo "  Dropping you into a plain shell so the window stays open."
+  echo
+  exec bash -l
+fi

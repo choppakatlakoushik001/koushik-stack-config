@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+# kunchen-session — single entry point into the Kunchen Stack tmux session.
+#
+# Contract: running this NEVER creates a duplicate. If "kunchen" is live you
+# attach to it; if not, it is restored from the last saved state, or built
+# from scratch. Alacritty calls this on launch, and `k` calls it from any shell.
+#
+# Layout is data, not code: edit WINDOWS below to change it.
+#
+# Env flags:
+#   KUNCHEN_BUILD_ONLY=1  build the default layout if missing, print, exit
+#   KUNCHEN_NO_ATTACH=1   build/restore but do not attach (for scripts/tests)
+
+set -uo pipefail
+
+SESSION="${KUNCHEN_SESSION:-kunchen}"
+BOOTSTRAP="_kunchen_boot"
+K="$HOME/kunchen"
+RESURRECT_LAST="$HOME/.local/share/tmux/resurrect/last"
+RESTORE_HELPER="$HOME/.local/bin/kunchen-restore"
+
+# True color + a TERM that your ~/.tmux.conf already has an override for.
+export TERM=xterm-256color
+
+# name:startdir  (missing dirs fall back to $HOME instead of failing)
+WINDOWS=(
+  "crew:$K/crew/kunchen_firstmate"
+  "axi:$K/axi"
+  "apps:$K/apps"
+  "compute:$HOME/lab"
+  "scratch:$HOME"
+)
+
+_dir() { [ -d "$1" ] && printf '%s' "$1" || printf '%s' "$HOME"; }
+
+build_default() {
+  local first="${WINDOWS[0]}"
+  tmux new-session -d -s "$SESSION" -n "${first%%:*}" -c "$(_dir "${first#*:}")"
+  local entry
+  for entry in "${WINDOWS[@]:1}"; do
+    tmux new-window -t "$SESSION" -n "${entry%%:*}" -c "$(_dir "${entry#*:}")"
+  done
+  tmux select-window -t "$SESSION:1"
+}
+
+# --- build-only mode (used by the restore helper as its fallback) ------------
+if [ -n "${KUNCHEN_BUILD_ONLY:-}" ]; then
+  tmux has-session -t "=$SESSION" 2>/dev/null || build_default
+  tmux list-windows -t "$SESSION" -F '#{window_index} #{window_name}'
+  exit 0
+fi
+
+# --- restore path after a reboot / `wsl --shutdown` --------------------------
+# tmux-resurrect will not restore without an attached client — it fails with
+# "no current client". So we do NOT restore here. Instead we park in a
+# bootstrap session and arm a client-attached hook; the moment Alacritty
+# attaches a real client, kunchen-restore runs and switches us across.
+if ! tmux has-session -t "=$SESSION" 2>/dev/null \
+   && [ -s "$RESURRECT_LAST" ] && [ -x "$RESTORE_HELPER" ] \
+   && [ -z "${KUNCHEN_NO_ATTACH:-}" ] && [ -t 1 ]; then
+  tmux new-session -d -s "$BOOTSTRAP" -c "$HOME" 2>/dev/null
+  tmux set-hook -g client-attached "run-shell -b '$RESTORE_HELPER'"
+  exec tmux attach-session -t "$BOOTSTRAP"
+fi
+
+# --- normal path -------------------------------------------------------------
+tmux has-session -t "=$SESSION" 2>/dev/null || build_default
+
+if [ -n "${KUNCHEN_NO_ATTACH:-}" ]; then
+  tmux list-windows -t "$SESSION" -F '#{window_index} #{window_name}'
+  exit 0
+fi
+
+# Already inside tmux? Switch instead of nesting.
+if [ -n "${TMUX:-}" ]; then
+  exec tmux switch-client -t "$SESSION"
+fi
+
+exec tmux attach-session -t "$SESSION"

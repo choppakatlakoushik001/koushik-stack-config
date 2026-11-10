@@ -1,0 +1,106 @@
+# Alacritty — Kunchen Stack terminal
+# Managed for the hybrid terminal-cloud setup.
+#
+# Design intent: Alacritty is a dumb, fast pane of glass. ALL multiplexing
+# (tabs, splits, sessions, persistence) is tmux's job.
+#
+# NOTE: the shell is NOT configured here. The Ctrl+Alt+K shortcut passes the
+# wsl/tmux command directly via `-e`, because a quoted argument could not
+# survive the .lnk -> Alacritty -> wsl -> bash parsing chain.
+
+[general]
+live_config_reload = true
+
+[window]
+title = "Kunchen Stack"
+dynamic_title = true
+decorations = "Full"
+startup_mode = "Maximized"
+dynamic_padding = true
+opacity = 1.0
+
+[window.padding]
+x = 8
+y = 6
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[font]
+size = 11.0
+builtin_box_drawing = true
+
+[font.normal]
+family = "JetBrainsMono NFM"
+style = "Regular"
+
+[font.bold]
+family = "JetBrainsMono NFM"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono NFM"
+style = "Italic"
+
+[font.offset]
+x = 0
+y = 1
+
+[colors.primary]
+background = "#1a1b26"
+foreground = "#c0caf5"
+dim_foreground = "#a9b1d6"
+
+[colors.cursor]
+text = "#1a1b26"
+cursor = "#c0caf5"
+
+[colors.selection]
+text = "CellForeground"
+background = "#33467c"
+
+[colors.normal]
+black   = "#15161e"
+red     = "#f7768e"
+green   = "#9ece6a"
+yellow  = "#e0af68"
+blue    = "#7aa2f7"
+magenta = "#bb9af7"
+cyan    = "#7dcfff"
+white   = "#a9b1d6"
+
+[colors.bright]
+black   = "#414868"
+red     = "#f7768e"
+green   = "#9ece6a"
+yellow  = "#e0af68"
+blue    = "#7aa2f7"
+magenta = "#bb9af7"
+cyan    = "#7dcfff"
+white   = "#c0caf5"
+
+[cursor]
+unfocused_hollow = true
+
+[cursor.style]
+shape = "Block"
+blinking = "On"
+
+[mouse]
+hide_when_typing = true
+
+# Ctrl+V pastes everywhere (Claude, Codex, bash, tmux, neovim) — not just an
+# Alacritty default (only Ctrl+Shift+V / Shift+Insert ship by default).
+# Deliberately not mirroring Ctrl+C here: that stays SIGINT in every shell
+# and TUI; copy-to-clipboard is handled per-app (mouse-drag selection here,
+# the neovim <C-c> visual-mode map inside neovim).
+[[keyboard.bindings]]
+key = "V"
+mods = "Control"
+action = "Paste"
+
+[bell]
+animation = "EaseOutExpo"
+duration = 0
+color = "#7aa2f7"
