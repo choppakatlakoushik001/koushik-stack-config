@@ -1,0 +1,1038 @@
+{
+  "measured_date": "2026-10-28",
+  "checker": "pyright 1.1.411",
+  "seeds": [
+    0,
+    1
+  ],
+  "baseline": "--no-typecheck; input annotations unchanged",
+  "runs": [
+    {
+      "task": "pass",
+      "seed": 0,
+      "typed": false,
+      "passed": true,
+      "attempts": 1,
+      "wall_seconds": 11.38,
+      "checker_catches": 0,
+      "prompt_tokens": 197,
+      "output_lines": 10,
+      "verdict": "results/ab/pass-0-untyped/jobs/20261028T125241-1cf83e27/verdict.json",
+      "metadata": {
+        "verdict": "pass",
+        "started_at": "2026-10-28T16:52:41+00:00",
+        "finished_at": "2026-10-28T16:52:53+00:00",
+        "reason": "tests and enabled checks passed",
+        "typecheck_enabled": false,
+        "attempt_budget": 1,
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 0,
+            "prompt_tokens": 197,
+            "output_lines": 10,
+            "verdict": "pass",
+            "test_exit_code": 0,
+            "typecheck_exit_code": null,
+            "model_seconds": 11.154,
+            "reason": "The change adds one to the input value, satisfying the acceptance criteria.",
+            "checker_caught_test_miss": false
+          }
+        ],
+        "checker": null,
+        "typecheck_exit_code": null,
+        "base_commit": "d0d8001181f4034e4b8bb11b1dc61a95d459fffe",
+        "spec_sha256": "044d1fec041d7cd6e0ffb25f71e3689d08112b1522ee724a8130535fcbebe300",
+        "changed_paths": [
+          "calc.py"
+        ],
+        "test_command": [
+          "python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_calc.py",
+          "-q"
+        ],
+        "test_exit_code": 0,
+        "prompt_tokens": 197,
+        "output_token_limit": 1200,
+        "model_seconds": 11.154,
+        "started_server": false,
+        "result_dir": "/home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/pass-0-untyped/jobs/20261028T125241-1cf83e27",
+        "wall_seconds": 11.29,
+        "attempts": 1
+      },
+      "artifacts": {
+        "model_reply.txt": "diff --git a/calc.py b/calc.py\nindex 1234567..89abcdef 100644\n--- a/calc.py\n+++ b/calc.py\n@@ -2,3 +2,3 @@\n def add_one(value):\n-    return value\n+    return value + 1\n\nREASON: The change adds one to the input value, satisfying the acceptance criteria.",
+        "prompt.txt": "Task: make the smallest change that satisfies the acceptance criteria.\nAcceptance: Change add_one so it returns its input plus one.\nAllowed paths: calc.py\nTest command: python3 -m unittest discover -s tests -p test_calc.py -q\nModify only the production file(s) in the allowlist; do not edit tests. Make the requested line edit only. Return exactly one git unified diff with diff --git, --- a/path, +++ b/path, and valid @@ hunks; no code fences. After the diff, add one REASON: line explaining why it works.\nContext follows; line numbers are informational.\n\n### calc.py\n1: def add_one(value):\n2:     return value\n\n### tests/test_calc.py\n1: import unittest\n2: from calc import add_one\n3: \n4: class CalcTests(unittest.TestCase):\n5:     def test_add_one(self):\n6:         self.assertEqual(add_one(4), 5)",
+        "test_output.txt": "$ python3 -m unittest discover -s tests -p test_calc.py -q\nexit_code=0\n--- stdout ---\n\n--- stderr ---\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n\n",
+        "typecheck_output.txt": "Disabled.\n",
+        "patch.diff": "diff --git a/calc.py b/calc.py\nindex 1234567..89abcdef 100644\n--- a/calc.py\n+++ b/calc.py\n@@ -2,2 +2,2 @@\n def add_one(value):\n-    return value\n+    return value + 1\n"
+      }
+    },
+    {
+      "task": "pass",
+      "seed": 0,
+      "typed": true,
+      "passed": false,
+      "attempts": 1,
+      "wall_seconds": 8.912,
+      "checker_catches": 0,
+      "prompt_tokens": 238,
+      "output_lines": 10,
+      "verdict": "results/ab/pass-0-typed/jobs/20261028T125253-eeac9433/verdict.json",
+      "metadata": {
+        "verdict": "fail",
+        "started_at": "2026-10-28T16:52:53+00:00",
+        "finished_at": "2026-10-28T16:53:02+00:00",
+        "reason": "command failed (1): git apply --check /home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/pass-0-typed/jobs/20261028T125253-eeac9433/patch.diff\nerror: patch failed: calc.py:1\nerror: calc.py: patch does not apply\n",
+        "typecheck_enabled": true,
+        "attempt_budget": 1,
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 0,
+            "prompt_tokens": 238,
+            "output_lines": 10,
+            "verdict": "fail",
+            "test_exit_code": null,
+            "typecheck_exit_code": null,
+            "model_seconds": 8.746,
+            "reason": "The function now returns its input plus one, as requested."
+          }
+        ],
+        "checker": [
+          "/home/chopp/.npm-global/bin/pyright"
+        ],
+        "wall_seconds": 8.79,
+        "attempts": 1
+      },
+      "artifacts": {
+        "model_reply.txt": "diff --git a/calc.py b/calc.py\nindex 1234567..89abcdef 100644\n--- a/calc.py\n+++ b/calc.py\n@@ -1,2 +1,2 @@\n-def add_one(value: int) -> int:\n+def add_one(value: int) -> int:\n     return value + 1\n\nREASON: The function now returns its input plus one, as requested.",
+        "prompt.txt": "Use explicit parameter and return type annotations on every function you change. Preserve existing annotated contracts. The changed Python files must pass strict static type checking; avoid Any, type: ignore, and checker suppression directives.\nTask: make the smallest change that satisfies the acceptance criteria.\nAcceptance: Change add_one so it returns its input plus one.\nAllowed paths: calc.py\nTest command: python3 -m unittest discover -s tests -p test_calc.py -q\nModify only the production file(s) in the allowlist; do not edit tests. Make the requested line edit only. Return exactly one git unified diff with diff --git, --- a/path, +++ b/path, and valid @@ hunks; no code fences. After the diff, add one REASON: line explaining why it works.\nContext follows; line numbers are informational.\n\n### calc.py\n1: def add_one(value):\n2:     return value\n\n### tests/test_calc.py\n1: import unittest\n2: from calc import add_one\n3: \n4: class CalcTests(unittest.TestCase):\n5:     def test_add_one(self):\n6:         self.assertEqual(add_one(4), 5)",
+        "test_output.txt": "Not run: command failed (1): git apply --check /home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/pass-0-typed/jobs/20261028T125253-eeac9433/patch.diff\nerror: patch failed: calc.py:1\nerror: calc.py: patch does not apply\n\n",
+        "patch.diff": "diff --git a/calc.py b/calc.py\nindex 1234567..89abcdef 100644\n--- a/calc.py\n+++ b/calc.py\n@@ -1,2 +1,2 @@\n-def add_one(value: int) -> int:\n+def add_one(value: int) -> int:\n     return value + 1\n"
+      }
+    },
+    {
+      "task": "fail",
+      "seed": 0,
+      "typed": false,
+      "passed": false,
+      "attempts": 1,
+      "wall_seconds": 8.956,
+      "checker_catches": 0,
+      "prompt_tokens": 156,
+      "output_lines": 10,
+      "verdict": "results/ab/fail-0-untyped/jobs/20261028T125302-53cd493c/verdict.json",
+      "metadata": {
+        "verdict": "fail",
+        "started_at": "2026-10-28T16:53:02+00:00",
+        "finished_at": "2026-10-28T16:53:11+00:00",
+        "reason": "tests or static type checker failed",
+        "typecheck_enabled": false,
+        "attempt_budget": 1,
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 0,
+            "prompt_tokens": 156,
+            "output_lines": 10,
+            "verdict": "fail",
+            "test_exit_code": 1,
+            "typecheck_exit_code": null,
+            "model_seconds": 8.735,
+            "reason": "The function now returns the input value plus four, satisfying the acceptance criteria.",
+            "checker_caught_test_miss": false
+          }
+        ],
+        "checker": null,
+        "typecheck_exit_code": null,
+        "base_commit": "c5445537e8f699015637af0654357b4e230bf215",
+        "spec_sha256": "437ab31c35ab77908352a3e66425e0381ffc2ecb9400a9f62f32b41b8f17c5da",
+        "changed_paths": [
+          "calc.py"
+        ],
+        "test_command": [
+          "python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_calc.py",
+          "-q"
+        ],
+        "test_exit_code": 1,
+        "prompt_tokens": 156,
+        "output_token_limit": 1200,
+        "model_seconds": 8.735,
+        "started_server": false,
+        "result_dir": "/home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/fail-0-untyped/jobs/20261028T125302-53cd493c",
+        "wall_seconds": 8.857,
+        "attempts": 1
+      },
+      "artifacts": {
+        "model_reply.txt": "diff --git a/calc.py b/calc.py\nindex 1234567..89abcdef 100644\n--- a/calc.py\n+++ b/calc.py\n@@ -2,3 +2,3 @@\n def choose(value):\n-    return value\n+    return value + 4\n\nREASON: The function now returns the input value plus four, satisfying the acceptance criteria.",
+        "prompt.txt": "Task: make the smallest change that satisfies the acceptance criteria.\nAcceptance: Change choose so it returns its input plus four (for input 4, return 8). Do not edit tests.\nAllowed paths: calc.py\nTest command: python3 -m unittest discover -s tests -p test_calc.py -q\nModify only the production file(s) in the allowlist; do not edit tests. Make the requested line edit only. Return exactly one git unified diff with diff --git, --- a/path, +++ b/path, and valid @@ hunks; no code fences. After the diff, add one REASON: line explaining why it works.\nContext follows; line numbers are informational.\n\n### calc.py\n1: def choose(value):\n2:     return value",
+        "test_output.txt": "$ python3 -m unittest discover -s tests -p test_calc.py -q\nexit_code=1\n--- stdout ---\n\n--- stderr ---\n======================================================================\nFAIL: test_choose (test_calc.CalcTests.test_choose)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/qwen-task-x63klp8m/src/tests/test_calc.py\", line 6, in test_choose\n    self.assertEqual(choose(4), 9)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: 8 != 9\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nFAILED (failures=1)\n\n",
+        "typecheck_output.txt": "Disabled.\n",
+        "patch.diff": "diff --git a/calc.py b/calc.py\nindex 1234567..89abcdef 100644\n--- a/calc.py\n+++ b/calc.py\n@@ -2,2 +2,2 @@\n def choose(value):\n-    return value\n+    return value + 4\n"
+      }
+    },
+    {
+      "task": "fail",
+      "seed": 0,
+      "typed": true,
+      "passed": false,
+      "attempts": 1,
+      "wall_seconds": 13.153,
+      "checker_catches": 0,
+      "prompt_tokens": 197,
+      "output_lines": 12,
+      "verdict": "results/ab/fail-0-typed/jobs/20261028T125311-1cda943c/verdict.json",
+      "metadata": {
+        "verdict": "fail",
+        "started_at": "2026-10-28T16:53:11+00:00",
+        "finished_at": "2026-10-28T16:53:24+00:00",
+        "reason": "command failed (1): git apply --check /home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/fail-0-typed/jobs/20261028T125311-1cda943c/patch.diff\nerror: patch failed: calc.py:1\nerror: calc.py: patch does not apply\n",
+        "typecheck_enabled": true,
+        "attempt_budget": 1,
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 0,
+            "prompt_tokens": 197,
+            "output_lines": 12,
+            "verdict": "fail",
+            "test_exit_code": null,
+            "typecheck_exit_code": null,
+            "model_seconds": 13.007,
+            "reason": "The function `choose` now returns its input plus four, as required. The parameter and return types are explicitly annotated to ensure type safety and clarity."
+          }
+        ],
+        "checker": [
+          "/home/chopp/.npm-global/bin/pyright"
+        ],
+        "wall_seconds": 13.052,
+        "attempts": 1
+      },
+      "artifacts": {
+        "model_reply.txt": "```diff\ndiff --git a/calc.py b/calc.py\nindex 1234567..89abcdef 100644\n--- a/calc.py\n+++ b/calc.py\n@@ -1,2 +1,2 @@\n-def choose(value):\n+def choose(value: int) -> int:\n     return value + 4\n```\n\nREASON: The function `choose` now returns its input plus four, as required. The parameter and return types are explicitly annotated to ensure type safety and clarity.",
+        "prompt.txt": "Use explicit parameter and return type annotations on every function you change. Preserve existing annotated contracts. The changed Python files must pass strict static type checking; avoid Any, type: ignore, and checker suppression directives.\nTask: make the smallest change that satisfies the acceptance criteria.\nAcceptance: Change choose so it returns its input plus four (for input 4, return 8). Do not edit tests.\nAllowed paths: calc.py\nTest command: python3 -m unittest discover -s tests -p test_calc.py -q\nModify only the production file(s) in the allowlist; do not edit tests. Make the requested line edit only. Return exactly one git unified diff with diff --git, --- a/path, +++ b/path, and valid @@ hunks; no code fences. After the diff, add one REASON: line explaining why it works.\nContext follows; line numbers are informational.\n\n### calc.py\n1: def choose(value):\n2:     return value",
+        "test_output.txt": "Not run: command failed (1): git apply --check /home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/fail-0-typed/jobs/20261028T125311-1cda943c/patch.diff\nerror: patch failed: calc.py:1\nerror: calc.py: patch does not apply\n\n",
+        "patch.diff": "diff --git a/calc.py b/calc.py\nindex 1234567..89abcdef 100644\n--- a/calc.py\n+++ b/calc.py\n@@ -1,2 +1,2 @@\n-def choose(value):\n+def choose(value: int) -> int:\n     return value + 4\n"
+      }
+    },
+    {
+      "task": "concat",
+      "seed": 0,
+      "typed": false,
+      "passed": true,
+      "attempts": 1,
+      "wall_seconds": 12.687,
+      "checker_catches": 0,
+      "prompt_tokens": 153,
+      "output_lines": 6,
+      "verdict": "results/ab/concat-0-untyped/jobs/20261028T125324-17d01a49/verdict.json",
+      "metadata": {
+        "verdict": "pass",
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 0,
+            "prompt_tokens": 153,
+            "output_lines": 6,
+            "verdict": "pass",
+            "test_exit_code": 0,
+            "typecheck_exit_code": null,
+            "model_seconds": 12.482,
+            "reason": "The function `concat_strings` is implemented to concatenate two strings `s1` and `s2` using the `+` operator, which is a built-in Python operator for string concatenation. This implementation directly returns the concatenated result, fulfilling the requirement of the function to concatenate the strings without a separator.",
+            "code_lines": 3,
+            "checker_caught_test_miss": false
+          }
+        ],
+        "typecheck_enabled": false,
+        "result_dir": "/home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/concat-0-untyped/jobs/20261028T125324-17d01a49",
+        "attempt_budget": 3,
+        "checker": null,
+        "attempts": 1,
+        "wall_seconds": 12.563
+      },
+      "artifacts": {
+        "attempt-1/model_reply.txt": "```python\ndef concat_strings(s1: str, s2: str) -> str:\n    \"\"\"Concatenate s1 and s2 without a separator.\"\"\"\n    return s1 + s2\n\nREASON: The function `concat_strings` is implemented to concatenate two strings `s1` and `s2` using the `+` operator, which is a built-in Python operator for string concatenation. This implementation directly returns the concatenated result, fulfilling the requirement of the function to concatenate the strings without a separator.",
+        "attempt-1/prompt.txt": "Write the complete Python function `concat_strings`. Keep its calling convention and docstring and replace `raise NotImplementedError` with a working implementation. Use only names that already exist in the module. Return one ```python block with only that function, then one line starting with REASON: explaining from first principles why it works.\n\n\nModule header:\n```python\n\n```\n\nFunction:\n```python\ndef concat_strings(s1: str, s2: str) -> str:\n    \"\"\"Concatenate s1 and s2 without a separator.\"\"\"\n    raise NotImplementedError\n```\n\nTests it must pass:\n```python\nimport unittest\nfrom calc import concat_strings\n\nclass Tests(unittest.TestCase):\n    def test_example(self):\n        self.assertIsInstance(concat_strings(\"foo\", \"bar\"), str)\n\n```",
+        "attempt-1/test_output.txt": ".\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
+        "attempt-1/typecheck_output.txt": "Disabled.\n"
+      }
+    },
+    {
+      "task": "concat",
+      "seed": 0,
+      "typed": true,
+      "passed": true,
+      "attempts": 1,
+      "wall_seconds": 9.234,
+      "checker_catches": 0,
+      "prompt_tokens": 194,
+      "output_lines": 6,
+      "verdict": "results/ab/concat-0-typed/jobs/20261028T125337-37f07393/verdict.json",
+      "metadata": {
+        "verdict": "pass",
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 0,
+            "prompt_tokens": 194,
+            "output_lines": 6,
+            "verdict": "pass",
+            "test_exit_code": 0,
+            "typecheck_exit_code": 0,
+            "model_seconds": 8.078,
+            "reason": "The function `concat_strings` is implemented to concatenate two strings `s1` and `s2` without any separator. It uses the `+` operator to concatenate the strings, which is a straightforward and efficient way to achieve this in Python. The function is tested with a simple test case to ensure it returns a string.",
+            "code_lines": 3,
+            "checker_caught_test_miss": false
+          }
+        ],
+        "typecheck_enabled": true,
+        "result_dir": "/home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/concat-0-typed/jobs/20261028T125337-37f07393",
+        "attempt_budget": 3,
+        "checker": [
+          "/home/chopp/.npm-global/bin/pyright"
+        ],
+        "attempts": 1,
+        "wall_seconds": 9.109
+      },
+      "artifacts": {
+        "attempt-1/model_reply.txt": "```python\ndef concat_strings(s1: str, s2: str) -> str:\n    \"\"\"Concatenate s1 and s2 without a separator.\"\"\"\n    return s1 + s2\n\nREASON: The function `concat_strings` is implemented to concatenate two strings `s1` and `s2` without any separator. It uses the `+` operator to concatenate the strings, which is a straightforward and efficient way to achieve this in Python. The function is tested with a simple test case to ensure it returns a string.",
+        "attempt-1/prompt.txt": "Write the complete Python function `concat_strings`. Keep its calling convention and docstring and replace `raise NotImplementedError` with a working implementation. Use only names that already exist in the module. Return one ```python block with only that function, then one line starting with REASON: explaining from first principles why it works.\nUse explicit parameter and return type annotations on every function you change. Preserve existing annotated contracts. The changed Python files must pass strict static type checking; avoid Any, type: ignore, and checker suppression directives.\n\n\nModule header:\n```python\n\n```\n\nFunction:\n```python\ndef concat_strings(s1: str, s2: str) -> str:\n    \"\"\"Concatenate s1 and s2 without a separator.\"\"\"\n    raise NotImplementedError\n```\n\nTests it must pass:\n```python\nimport unittest\nfrom calc import concat_strings\n\nclass Tests(unittest.TestCase):\n    def test_example(self):\n        self.assertIsInstance(concat_strings(\"foo\", \"bar\"), str)\n\n```",
+        "attempt-1/test_output.txt": ".\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
+        "attempt-1/typecheck_output.txt": "0 errors, 0 warnings, 0 informations\n"
+      }
+    },
+    {
+      "task": "maximum",
+      "seed": 0,
+      "typed": false,
+      "passed": true,
+      "attempts": 1,
+      "wall_seconds": 19.658,
+      "checker_catches": 0,
+      "prompt_tokens": 152,
+      "output_lines": 12,
+      "verdict": "results/ab/maximum-0-untyped/jobs/20261028T125346-0ea7cff1/verdict.json",
+      "metadata": {
+        "verdict": "pass",
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 0,
+            "prompt_tokens": 152,
+            "output_lines": 12,
+            "verdict": "pass",
+            "test_exit_code": 0,
+            "typecheck_exit_code": null,
+            "model_seconds": 19.471,
+            "reason": "The function iterates through the list of numbers, comparing each number to the current maximum. If a number is found to be greater than the current maximum, it updates the maximum. This process continues until all numbers have been checked, ensuring that the largest number is returned. The function raises a ValueError if the input list is empty, as specified in the docstring.",
+            "code_lines": 9,
+            "checker_caught_test_miss": false
+          }
+        ],
+        "typecheck_enabled": false,
+        "result_dir": "/home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/maximum-0-untyped/jobs/20261028T125346-0ea7cff1",
+        "attempt_budget": 3,
+        "checker": null,
+        "attempts": 1,
+        "wall_seconds": 19.566
+      },
+      "artifacts": {
+        "attempt-1/model_reply.txt": "```python\ndef find_max(nums: list[int]) -> int:\n    \"\"\"Return the largest integer; raise ValueError on empty input.\"\"\"\n    if not nums:\n        raise ValueError(\"Input list is empty\")\n    max_num = nums[0]\n    for num in nums:\n        if num > max_num:\n            max_num = num\n    return max_num\n\nREASON: The function iterates through the list of numbers, comparing each number to the current maximum. If a number is found to be greater than the current maximum, it updates the maximum. This process continues until all numbers have been checked, ensuring that the largest number is returned. The function raises a ValueError if the input list is empty, as specified in the docstring.",
+        "attempt-1/prompt.txt": "Write the complete Python function `find_max`. Keep its calling convention and docstring and replace `raise NotImplementedError` with a working implementation. Use only names that already exist in the module. Return one ```python block with only that function, then one line starting with REASON: explaining from first principles why it works.\n\n\nModule header:\n```python\n\n```\n\nFunction:\n```python\ndef find_max(nums: list[int]) -> int:\n    \"\"\"Return the largest integer; raise ValueError on empty input.\"\"\"\n    raise NotImplementedError\n```\n\nTests it must pass:\n```python\nimport unittest\nfrom calc import find_max\n\nclass Tests(unittest.TestCase):\n    def test_example(self):\n        self.assertEqual(find_max([1, 3, 2]), 3)\n\n```",
+        "attempt-1/test_output.txt": ".\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
+        "attempt-1/typecheck_output.txt": "Disabled.\n"
+      }
+    },
+    {
+      "task": "maximum",
+      "seed": 0,
+      "typed": true,
+      "passed": true,
+      "attempts": 1,
+      "wall_seconds": 19.718,
+      "checker_catches": 0,
+      "prompt_tokens": 193,
+      "output_lines": 15,
+      "verdict": "results/ab/maximum-0-typed/jobs/20261028T125406-09e3c999/verdict.json",
+      "metadata": {
+        "verdict": "pass",
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 0,
+            "prompt_tokens": 193,
+            "output_lines": 15,
+            "verdict": "pass",
+            "test_exit_code": 0,
+            "typecheck_exit_code": 0,
+            "model_seconds": 17.68,
+            "reason": "The function iterates through the list of numbers, comparing each number to the current maximum. If a number is greater than the current maximum, it updates the maximum. This ensures that the largest number is found and returned. The function raises a ValueError if the input list is empty, as specified in the docstring.",
+            "code_lines": 9,
+            "checker_caught_test_miss": false
+          }
+        ],
+        "typecheck_enabled": true,
+        "result_dir": "/home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/maximum-0-typed/jobs/20261028T125406-09e3c999",
+        "attempt_budget": 3,
+        "checker": [
+          "/home/chopp/.npm-global/bin/pyright"
+        ],
+        "attempts": 1,
+        "wall_seconds": 19.553
+      },
+      "artifacts": {
+        "attempt-1/model_reply.txt": "```python\nfrom typing import *\nfrom collections import *\n\ndef find_max(nums: list[int]) -> int:\n    \"\"\"Return the largest integer; raise ValueError on empty input.\"\"\"\n    if not nums:\n        raise ValueError(\"Input list is empty\")\n    max_num = nums[0]\n    for num in nums:\n        if num > max_num:\n            max_num = num\n    return max_num\n\nREASON: The function iterates through the list of numbers, comparing each number to the current maximum. If a number is greater than the current maximum, it updates the maximum. This ensures that the largest number is found and returned. The function raises a ValueError if the input list is empty, as specified in the docstring.",
+        "attempt-1/prompt.txt": "Write the complete Python function `find_max`. Keep its calling convention and docstring and replace `raise NotImplementedError` with a working implementation. Use only names that already exist in the module. Return one ```python block with only that function, then one line starting with REASON: explaining from first principles why it works.\nUse explicit parameter and return type annotations on every function you change. Preserve existing annotated contracts. The changed Python files must pass strict static type checking; avoid Any, type: ignore, and checker suppression directives.\n\n\nModule header:\n```python\n\n```\n\nFunction:\n```python\ndef find_max(nums: list[int]) -> int:\n    \"\"\"Return the largest integer; raise ValueError on empty input.\"\"\"\n    raise NotImplementedError\n```\n\nTests it must pass:\n```python\nimport unittest\nfrom calc import find_max\n\nclass Tests(unittest.TestCase):\n    def test_example(self):\n        self.assertEqual(find_max([1, 3, 2]), 3)\n\n```",
+        "attempt-1/test_output.txt": ".\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
+        "attempt-1/typecheck_output.txt": "0 errors, 0 warnings, 0 informations\n"
+      }
+    },
+    {
+      "task": "first",
+      "seed": 0,
+      "typed": false,
+      "passed": true,
+      "attempts": 1,
+      "wall_seconds": 13.708,
+      "checker_catches": 0,
+      "prompt_tokens": 153,
+      "output_lines": 6,
+      "verdict": "results/ab/first-0-untyped/jobs/20261028T125425-076bb1db/verdict.json",
+      "metadata": {
+        "verdict": "pass",
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 0,
+            "prompt_tokens": 153,
+            "output_lines": 6,
+            "verdict": "pass",
+            "test_exit_code": 0,
+            "typecheck_exit_code": null,
+            "model_seconds": 13.442,
+            "reason": "The function checks if the list is empty. If it is, it returns 0. Otherwise, it returns the first item in the list. This is a straightforward implementation that meets the requirements of the function.",
+            "code_lines": 3,
+            "checker_caught_test_miss": false
+          }
+        ],
+        "typecheck_enabled": false,
+        "result_dir": "/home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/first-0-untyped/jobs/20261028T125425-076bb1db",
+        "attempt_budget": 3,
+        "checker": null,
+        "attempts": 1,
+        "wall_seconds": 13.569
+      },
+      "artifacts": {
+        "attempt-1/model_reply.txt": "```python\ndef first_or_zero(values: list[int]) -> int:\n    \"\"\"Return the first item, or zero for empty input.\"\"\"\n    return values[0] if values else 0\n\nREASON: The function checks if the list is empty. If it is, it returns 0. Otherwise, it returns the first item in the list. This is a straightforward implementation that meets the requirements of the function.",
+        "attempt-1/prompt.txt": "Write the complete Python function `first_or_zero`. Keep its calling convention and docstring and replace `raise NotImplementedError` with a working implementation. Use only names that already exist in the module. Return one ```python block with only that function, then one line starting with REASON: explaining from first principles why it works.\n\n\nModule header:\n```python\n\n```\n\nFunction:\n```python\ndef first_or_zero(values: list[int]) -> int:\n    \"\"\"Return the first item, or zero for empty input.\"\"\"\n    raise NotImplementedError\n```\n\nTests it must pass:\n```python\nimport unittest\nfrom calc import first_or_zero\n\nclass Tests(unittest.TestCase):\n    def test_example(self):\n        self.assertEqual(first_or_zero([7, 8]), 7)\n\n```",
+        "attempt-1/test_output.txt": ".\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
+        "attempt-1/typecheck_output.txt": "Disabled.\n"
+      }
+    },
+    {
+      "task": "first",
+      "seed": 0,
+      "typed": true,
+      "passed": true,
+      "attempts": 1,
+      "wall_seconds": 15.478,
+      "checker_catches": 0,
+      "prompt_tokens": 194,
+      "output_lines": 9,
+      "verdict": "results/ab/first-0-typed/jobs/20261028T125439-03c6cd63/verdict.json",
+      "metadata": {
+        "verdict": "pass",
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 0,
+            "prompt_tokens": 194,
+            "output_lines": 9,
+            "verdict": "pass",
+            "test_exit_code": 0,
+            "typecheck_exit_code": 0,
+            "model_seconds": 13.625,
+            "reason": "The function checks if the list is empty. If it is, it returns 0. Otherwise, it returns the first item in the list. This is a straightforward implementation that meets the requirements of the function.",
+            "code_lines": 3,
+            "checker_caught_test_miss": false
+          }
+        ],
+        "typecheck_enabled": true,
+        "result_dir": "/home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/first-0-typed/jobs/20261028T125439-03c6cd63",
+        "attempt_budget": 3,
+        "checker": [
+          "/home/chopp/.npm-global/bin/pyright"
+        ],
+        "attempts": 1,
+        "wall_seconds": 15.314
+      },
+      "artifacts": {
+        "attempt-1/model_reply.txt": "```python\nfrom typing import *\nfrom collections import *\n\ndef first_or_zero(values: list[int]) -> int:\n    \"\"\"Return the first item, or zero for empty input.\"\"\"\n    return values[0] if values else 0\n\nREASON: The function checks if the list is empty. If it is, it returns 0. Otherwise, it returns the first item in the list. This is a straightforward implementation that meets the requirements of the function.",
+        "attempt-1/prompt.txt": "Write the complete Python function `first_or_zero`. Keep its calling convention and docstring and replace `raise NotImplementedError` with a working implementation. Use only names that already exist in the module. Return one ```python block with only that function, then one line starting with REASON: explaining from first principles why it works.\nUse explicit parameter and return type annotations on every function you change. Preserve existing annotated contracts. The changed Python files must pass strict static type checking; avoid Any, type: ignore, and checker suppression directives.\n\n\nModule header:\n```python\n\n```\n\nFunction:\n```python\ndef first_or_zero(values: list[int]) -> int:\n    \"\"\"Return the first item, or zero for empty input.\"\"\"\n    raise NotImplementedError\n```\n\nTests it must pass:\n```python\nimport unittest\nfrom calc import first_or_zero\n\nclass Tests(unittest.TestCase):\n    def test_example(self):\n        self.assertEqual(first_or_zero([7, 8]), 7)\n\n```",
+        "attempt-1/test_output.txt": ".\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
+        "attempt-1/typecheck_output.txt": "0 errors, 0 warnings, 0 informations\n"
+      }
+    },
+    {
+      "task": "pass",
+      "seed": 1,
+      "typed": true,
+      "passed": false,
+      "attempts": 1,
+      "wall_seconds": 9.414,
+      "checker_catches": 0,
+      "prompt_tokens": 238,
+      "output_lines": 6,
+      "verdict": "results/ab/pass-1-typed/jobs/20261028T125454-bb11610c/verdict.json",
+      "metadata": {
+        "verdict": "fail",
+        "started_at": "2026-10-28T16:54:54+00:00",
+        "finished_at": "2026-10-28T16:55:04+00:00",
+        "reason": "patch has no valid allowed paths",
+        "typecheck_enabled": true,
+        "attempt_budget": 1,
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 1,
+            "prompt_tokens": 238,
+            "output_lines": 6,
+            "verdict": "fail",
+            "test_exit_code": null,
+            "typecheck_exit_code": null,
+            "model_seconds": 9.189,
+            "reason": "The function now explicitly returns an integer, which is consistent with the existing contract and ensures that the function's output is of the expected type."
+          }
+        ],
+        "checker": [
+          "/home/chopp/.npm-global/bin/pyright"
+        ],
+        "wall_seconds": 9.238,
+        "attempts": 1
+      },
+      "artifacts": {
+        "model_reply.txt": "@@ -1,2 +1,2 @@\n-    def add_one(value):\n+    def add_one(value: int) -> int:\n         return value\n\nREASON: The function now explicitly returns an integer, which is consistent with the existing contract and ensures that the function's output is of the expected type.",
+        "prompt.txt": "Use explicit parameter and return type annotations on every function you change. Preserve existing annotated contracts. The changed Python files must pass strict static type checking; avoid Any, type: ignore, and checker suppression directives.\nTask: make the smallest change that satisfies the acceptance criteria.\nAcceptance: Change add_one so it returns its input plus one.\nAllowed paths: calc.py\nTest command: python3 -m unittest discover -s tests -p test_calc.py -q\nModify only the production file(s) in the allowlist; do not edit tests. Make the requested line edit only. Return exactly one git unified diff with diff --git, --- a/path, +++ b/path, and valid @@ hunks; no code fences. After the diff, add one REASON: line explaining why it works.\nContext follows; line numbers are informational.\n\n### calc.py\n1: def add_one(value):\n2:     return value\n\n### tests/test_calc.py\n1: import unittest\n2: from calc import add_one\n3: \n4: class CalcTests(unittest.TestCase):\n5:     def test_add_one(self):\n6:         self.assertEqual(add_one(4), 5)",
+        "test_output.txt": "Not run: patch has no valid allowed paths\n"
+      }
+    },
+    {
+      "task": "pass",
+      "seed": 1,
+      "typed": false,
+      "passed": true,
+      "attempts": 1,
+      "wall_seconds": 6.512,
+      "checker_catches": 0,
+      "prompt_tokens": 197,
+      "output_lines": 10,
+      "verdict": "results/ab/pass-1-untyped/jobs/20261028T125504-af0dd869/verdict.json",
+      "metadata": {
+        "verdict": "pass",
+        "started_at": "2026-10-28T16:55:04+00:00",
+        "finished_at": "2026-10-28T16:55:10+00:00",
+        "reason": "tests and enabled checks passed",
+        "typecheck_enabled": false,
+        "attempt_budget": 1,
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 1,
+            "prompt_tokens": 197,
+            "output_lines": 10,
+            "verdict": "pass",
+            "test_exit_code": 0,
+            "typecheck_exit_code": null,
+            "model_seconds": 6.247,
+            "reason": "The change adds one to the input value, satisfying the acceptance criteria.",
+            "checker_caught_test_miss": false
+          }
+        ],
+        "checker": null,
+        "typecheck_exit_code": null,
+        "base_commit": "d0d8001181f4034e4b8bb11b1dc61a95d459fffe",
+        "spec_sha256": "044d1fec041d7cd6e0ffb25f71e3689d08112b1522ee724a8130535fcbebe300",
+        "changed_paths": [
+          "calc.py"
+        ],
+        "test_command": [
+          "python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_calc.py",
+          "-q"
+        ],
+        "test_exit_code": 0,
+        "prompt_tokens": 197,
+        "output_token_limit": 1200,
+        "model_seconds": 6.247,
+        "started_server": false,
+        "result_dir": "/home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/pass-1-untyped/jobs/20261028T125504-af0dd869",
+        "wall_seconds": 6.402,
+        "attempts": 1
+      },
+      "artifacts": {
+        "model_reply.txt": "diff --git a/calc.py b/calc.py\nindex 1234567..89abcdef 100644\n--- a/calc.py\n+++ b/calc.py\n@@ -2,3 +2,3 @@\n def add_one(value):\n-    return value\n+    return value + 1\n\nREASON: The change adds one to the input value, satisfying the acceptance criteria.",
+        "prompt.txt": "Task: make the smallest change that satisfies the acceptance criteria.\nAcceptance: Change add_one so it returns its input plus one.\nAllowed paths: calc.py\nTest command: python3 -m unittest discover -s tests -p test_calc.py -q\nModify only the production file(s) in the allowlist; do not edit tests. Make the requested line edit only. Return exactly one git unified diff with diff --git, --- a/path, +++ b/path, and valid @@ hunks; no code fences. After the diff, add one REASON: line explaining why it works.\nContext follows; line numbers are informational.\n\n### calc.py\n1: def add_one(value):\n2:     return value\n\n### tests/test_calc.py\n1: import unittest\n2: from calc import add_one\n3: \n4: class CalcTests(unittest.TestCase):\n5:     def test_add_one(self):\n6:         self.assertEqual(add_one(4), 5)",
+        "test_output.txt": "$ python3 -m unittest discover -s tests -p test_calc.py -q\nexit_code=0\n--- stdout ---\n\n--- stderr ---\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n\n",
+        "typecheck_output.txt": "Disabled.\n",
+        "patch.diff": "diff --git a/calc.py b/calc.py\nindex 1234567..89abcdef 100644\n--- a/calc.py\n+++ b/calc.py\n@@ -2,2 +2,2 @@\n def add_one(value):\n-    return value\n+    return value + 1\n"
+      }
+    },
+    {
+      "task": "fail",
+      "seed": 1,
+      "typed": true,
+      "passed": false,
+      "attempts": 1,
+      "wall_seconds": 4.059,
+      "checker_catches": 0,
+      "prompt_tokens": 197,
+      "output_lines": 12,
+      "verdict": "results/ab/fail-1-typed/jobs/20261028T125510-6ce1a89d/verdict.json",
+      "metadata": {
+        "verdict": "fail",
+        "started_at": "2026-10-28T16:55:10+00:00",
+        "finished_at": "2026-10-28T16:55:14+00:00",
+        "reason": "command failed (1): git apply --check /home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/fail-1-typed/jobs/20261028T125510-6ce1a89d/patch.diff\nerror: patch failed: calc.py:1\nerror: calc.py: patch does not apply\n",
+        "typecheck_enabled": true,
+        "attempt_budget": 1,
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 1,
+            "prompt_tokens": 197,
+            "output_lines": 12,
+            "verdict": "fail",
+            "test_exit_code": null,
+            "typecheck_exit_code": null,
+            "model_seconds": 3.881,
+            "reason": "The function `choose` now returns its input plus four, as required. The parameter and return types are explicitly annotated to ensure type safety and clarity."
+          }
+        ],
+        "checker": [
+          "/home/chopp/.npm-global/bin/pyright"
+        ],
+        "wall_seconds": 3.941,
+        "attempts": 1
+      },
+      "artifacts": {
+        "model_reply.txt": "```diff\ndiff --git a/calc.py b/calc.py\nindex 1234567..89abcdef 100644\n--- a/calc.py\n+++ b/calc.py\n@@ -1,2 +1,2 @@\n-def choose(value):\n+def choose(value: int) -> int:\n     return value + 4\n```\n\nREASON: The function `choose` now returns its input plus four, as required. The parameter and return types are explicitly annotated to ensure type safety and clarity.",
+        "prompt.txt": "Use explicit parameter and return type annotations on every function you change. Preserve existing annotated contracts. The changed Python files must pass strict static type checking; avoid Any, type: ignore, and checker suppression directives.\nTask: make the smallest change that satisfies the acceptance criteria.\nAcceptance: Change choose so it returns its input plus four (for input 4, return 8). Do not edit tests.\nAllowed paths: calc.py\nTest command: python3 -m unittest discover -s tests -p test_calc.py -q\nModify only the production file(s) in the allowlist; do not edit tests. Make the requested line edit only. Return exactly one git unified diff with diff --git, --- a/path, +++ b/path, and valid @@ hunks; no code fences. After the diff, add one REASON: line explaining why it works.\nContext follows; line numbers are informational.\n\n### calc.py\n1: def choose(value):\n2:     return value",
+        "test_output.txt": "Not run: command failed (1): git apply --check /home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/fail-1-typed/jobs/20261028T125510-6ce1a89d/patch.diff\nerror: patch failed: calc.py:1\nerror: calc.py: patch does not apply\n\n",
+        "patch.diff": "diff --git a/calc.py b/calc.py\nindex 1234567..89abcdef 100644\n--- a/calc.py\n+++ b/calc.py\n@@ -1,2 +1,2 @@\n-def choose(value):\n+def choose(value: int) -> int:\n     return value + 4\n"
+      }
+    },
+    {
+      "task": "fail",
+      "seed": 1,
+      "typed": false,
+      "passed": false,
+      "attempts": 1,
+      "wall_seconds": 5.57,
+      "checker_catches": 0,
+      "prompt_tokens": 156,
+      "output_lines": 5,
+      "verdict": "results/ab/fail-1-untyped/jobs/20261028T125514-ca967a92/verdict.json",
+      "metadata": {
+        "verdict": "fail",
+        "started_at": "2026-10-28T16:55:14+00:00",
+        "finished_at": "2026-10-28T16:55:20+00:00",
+        "reason": "patch has no valid allowed paths",
+        "typecheck_enabled": false,
+        "attempt_budget": 1,
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 1,
+            "prompt_tokens": 156,
+            "output_lines": 5,
+            "verdict": "fail",
+            "test_exit_code": null,
+            "typecheck_exit_code": null,
+            "model_seconds": 5.379,
+            "reason": "The function `choose` is modified to return its input plus four, satisfying the acceptance criteria."
+          }
+        ],
+        "checker": null,
+        "wall_seconds": 5.431,
+        "attempts": 1
+      },
+      "artifacts": {
+        "model_reply.txt": "@@ -1,2 +1,2 @@\n-    return value\n+    return value + 4\n\nREASON: The function `choose` is modified to return its input plus four, satisfying the acceptance criteria.",
+        "prompt.txt": "Task: make the smallest change that satisfies the acceptance criteria.\nAcceptance: Change choose so it returns its input plus four (for input 4, return 8). Do not edit tests.\nAllowed paths: calc.py\nTest command: python3 -m unittest discover -s tests -p test_calc.py -q\nModify only the production file(s) in the allowlist; do not edit tests. Make the requested line edit only. Return exactly one git unified diff with diff --git, --- a/path, +++ b/path, and valid @@ hunks; no code fences. After the diff, add one REASON: line explaining why it works.\nContext follows; line numbers are informational.\n\n### calc.py\n1: def choose(value):\n2:     return value",
+        "test_output.txt": "Not run: patch has no valid allowed paths\n"
+      }
+    },
+    {
+      "task": "concat",
+      "seed": 1,
+      "typed": true,
+      "passed": true,
+      "attempts": 1,
+      "wall_seconds": 17.541,
+      "checker_catches": 0,
+      "prompt_tokens": 194,
+      "output_lines": 9,
+      "verdict": "results/ab/concat-1-typed/jobs/20261028T125520-643d1d58/verdict.json",
+      "metadata": {
+        "verdict": "pass",
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 1,
+            "prompt_tokens": 194,
+            "output_lines": 9,
+            "verdict": "pass",
+            "test_exit_code": 0,
+            "typecheck_exit_code": 0,
+            "model_seconds": 16.178,
+            "reason": "The function `concat_strings` is implemented by using the `+` operator to concatenate two strings. This operator is defined in Python to concatenate strings, and it works by appending the second string to the end of the first string. The function returns the resulting string, which is the concatenation of `s1` and `s2`. This implementation satisfies the requirements of the function's docstring and the test cases provided.",
+            "code_lines": 3,
+            "checker_caught_test_miss": false
+          }
+        ],
+        "typecheck_enabled": true,
+        "result_dir": "/home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/concat-1-typed/jobs/20261028T125520-643d1d58",
+        "attempt_budget": 3,
+        "checker": [
+          "/home/chopp/.npm-global/bin/pyright"
+        ],
+        "attempts": 1,
+        "wall_seconds": 17.4
+      },
+      "artifacts": {
+        "attempt-1/model_reply.txt": "```python\nfrom typing import *\nfrom collections import *\n\ndef concat_strings(s1: str, s2: str) -> str:\n    \"\"\"Concatenate s1 and s2 without a separator.\"\"\"\n    return s1 + s2\n\nREASON: The function `concat_strings` is implemented by using the `+` operator to concatenate two strings. This operator is defined in Python to concatenate strings, and it works by appending the second string to the end of the first string. The function returns the resulting string, which is the concatenation of `s1` and `s2`. This implementation satisfies the requirements of the function's docstring and the test cases provided.",
+        "attempt-1/prompt.txt": "Write the complete Python function `concat_strings`. Keep its calling convention and docstring and replace `raise NotImplementedError` with a working implementation. Use only names that already exist in the module. Return one ```python block with only that function, then one line starting with REASON: explaining from first principles why it works.\nUse explicit parameter and return type annotations on every function you change. Preserve existing annotated contracts. The changed Python files must pass strict static type checking; avoid Any, type: ignore, and checker suppression directives.\n\n\nModule header:\n```python\n\n```\n\nFunction:\n```python\ndef concat_strings(s1: str, s2: str) -> str:\n    \"\"\"Concatenate s1 and s2 without a separator.\"\"\"\n    raise NotImplementedError\n```\n\nTests it must pass:\n```python\nimport unittest\nfrom calc import concat_strings\n\nclass Tests(unittest.TestCase):\n    def test_example(self):\n        self.assertIsInstance(concat_strings(\"foo\", \"bar\"), str)\n\n```",
+        "attempt-1/test_output.txt": ".\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
+        "attempt-1/typecheck_output.txt": "0 errors, 0 warnings, 0 informations\n"
+      }
+    },
+    {
+      "task": "concat",
+      "seed": 1,
+      "typed": false,
+      "passed": true,
+      "attempts": 2,
+      "wall_seconds": 29.825,
+      "checker_catches": 0,
+      "prompt_tokens": 469,
+      "output_lines": 23,
+      "verdict": "results/ab/concat-1-untyped/jobs/20261028T125538-3be2efbe/verdict.json",
+      "metadata": {
+        "verdict": "pass",
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 1,
+            "prompt_tokens": 153,
+            "output_lines": 14,
+            "verdict": "fail",
+            "test_exit_code": null,
+            "typecheck_exit_code": null,
+            "model_seconds": 18.954,
+            "reason": "no parsable function"
+          },
+          {
+            "attempt": 2,
+            "seed": 2,
+            "prompt_tokens": 316,
+            "output_lines": 9,
+            "verdict": "pass",
+            "test_exit_code": 0,
+            "typecheck_exit_code": null,
+            "model_seconds": 10.608,
+            "reason": "The function `concat_strings` is implemented to concatenate two strings `s1` and `s2` using the `+` operator, which is a standard way to concatenate strings in Python. This implementation meets the requirements of the function's docstring, which states that it should concatenate the strings without a separator. The provided test cases in the `Tests` class verify that the function works as expected.",
+            "code_lines": 3,
+            "checker_caught_test_miss": false
+          }
+        ],
+        "typecheck_enabled": false,
+        "result_dir": "/home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/concat-1-untyped/jobs/20261028T125538-3be2efbe",
+        "attempt_budget": 3,
+        "checker": null,
+        "attempts": 2,
+        "wall_seconds": 29.668
+      },
+      "artifacts": {
+        "attempt-1/model_reply.txt": "```python\nModule header:\n```python\nfrom typing import *\n```\n\nFunction:\n```python\ndef concat_strings(s1: str, s2: str) -> str:\n    \"\"\"Concatenate s1 and s2 without a separator.\"\"\"\n    return s1 + s2\n```\n\nREASON: The function `concat_strings` is implemented to concatenate two strings `s1` and `s2` using the `+` operator, which is a standard way to concatenate strings in Python. This implementation meets the requirements of the function's docstring, which states that it should concatenate the strings without a separator. The provided test cases in the `Tests` class verify that the function works as expected.",
+        "attempt-1/prompt.txt": "Write the complete Python function `concat_strings`. Keep its calling convention and docstring and replace `raise NotImplementedError` with a working implementation. Use only names that already exist in the module. Return one ```python block with only that function, then one line starting with REASON: explaining from first principles why it works.\n\n\nModule header:\n```python\n\n```\n\nFunction:\n```python\ndef concat_strings(s1: str, s2: str) -> str:\n    \"\"\"Concatenate s1 and s2 without a separator.\"\"\"\n    raise NotImplementedError\n```\n\nTests it must pass:\n```python\nimport unittest\nfrom calc import concat_strings\n\nclass Tests(unittest.TestCase):\n    def test_example(self):\n        self.assertIsInstance(concat_strings(\"foo\", \"bar\"), str)\n\n```",
+        "attempt-2/model_reply.txt": "```python\nfrom typing import *\n\ndef concat_strings(s1: str, s2: str) -> str:\n    \"\"\"Concatenate s1 and s2 without a separator.\"\"\"\n    return s1 + s2\n\nREASON: The function `concat_strings` is implemented to concatenate two strings `s1` and `s2` using the `+` operator, which is a standard way to concatenate strings in Python. This implementation meets the requirements of the function's docstring, which states that it should concatenate the strings without a separator. The provided test cases in the `Tests` class verify that the function works as expected.\n```",
+        "attempt-2/prompt.txt": "Write the complete Python function `concat_strings`. Keep its calling convention and docstring and replace `raise NotImplementedError` with a working implementation. Use only names that already exist in the module. Return one ```python block with only that function, then one line starting with REASON: explaining from first principles why it works.\n\n\nModule header:\n```python\n\n```\n\nFunction:\n```python\ndef concat_strings(s1: str, s2: str) -> str:\n    \"\"\"Concatenate s1 and s2 without a separator.\"\"\"\n    raise NotImplementedError\n```\n\nTests it must pass:\n```python\nimport unittest\nfrom calc import concat_strings\n\nclass Tests(unittest.TestCase):\n    def test_example(self):\n        self.assertIsInstance(concat_strings(\"foo\", \"bar\"), str)\n\n```\n\nYour previous reply had no parsable function:\n```python\nModule header:\n```python\nfrom typing import *\n```\n\nFunction:\n```python\ndef concat_strings(s1: str, s2: str) -> str:\n    \"\"\"Concatenate s1 and s2 without a separator.\"\"\"\n    return s1 + s2\n```\n\nREASON: The function `concat_strings` is implemented to concatenate two strings `s1` and `s2` using the `+` operator, which is a standard way to concatenate strings in Python. This implementation meets the requirements of the function's docstring, which states that it should concatenate the strings without a separator. The provided test cases in the `Tests` class verify that the function works as expected.\nReturn the complete function in a Python code block.",
+        "attempt-2/test_output.txt": ".\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
+        "attempt-2/typecheck_output.txt": "Disabled.\n"
+      }
+    },
+    {
+      "task": "maximum",
+      "seed": 1,
+      "typed": true,
+      "passed": true,
+      "attempts": 1,
+      "wall_seconds": 25.591,
+      "checker_catches": 0,
+      "prompt_tokens": 193,
+      "output_lines": 13,
+      "verdict": "results/ab/maximum-1-typed/jobs/20261028T125607-d5666aef/verdict.json",
+      "metadata": {
+        "verdict": "pass",
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 1,
+            "prompt_tokens": 193,
+            "output_lines": 13,
+            "verdict": "pass",
+            "test_exit_code": 0,
+            "typecheck_exit_code": 0,
+            "model_seconds": 23.82,
+            "reason": "The function iterates through the list of numbers, comparing each number to the current maximum. If a larger number is found, it updates the maximum. This ensures that the largest number in the list is returned. The function raises a ValueError if the input list is empty, as specified in the docstring. The function is tested with a simple example to ensure it works as expected.",
+            "code_lines": 9,
+            "checker_caught_test_miss": false
+          }
+        ],
+        "typecheck_enabled": true,
+        "result_dir": "/home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/maximum-1-typed/jobs/20261028T125607-d5666aef",
+        "attempt_budget": 3,
+        "checker": [
+          "/home/chopp/.npm-global/bin/pyright"
+        ],
+        "attempts": 1,
+        "wall_seconds": 25.475
+      },
+      "artifacts": {
+        "attempt-1/model_reply.txt": "```python\ndef find_max(nums: list[int]) -> int:\n    \"\"\"Return the largest integer; raise ValueError on empty input.\"\"\"\n    if not nums:\n        raise ValueError(\"Input list is empty\")\n    max_num = nums[0]\n    for num in nums:\n        if num > max_num:\n            max_num = num\n    return max_num\n\nREASON: The function iterates through the list of numbers, comparing each number to the current maximum. If a larger number is found, it updates the maximum. This ensures that the largest number in the list is returned. The function raises a ValueError if the input list is empty, as specified in the docstring. The function is tested with a simple example to ensure it works as expected.\n```",
+        "attempt-1/prompt.txt": "Write the complete Python function `find_max`. Keep its calling convention and docstring and replace `raise NotImplementedError` with a working implementation. Use only names that already exist in the module. Return one ```python block with only that function, then one line starting with REASON: explaining from first principles why it works.\nUse explicit parameter and return type annotations on every function you change. Preserve existing annotated contracts. The changed Python files must pass strict static type checking; avoid Any, type: ignore, and checker suppression directives.\n\n\nModule header:\n```python\n\n```\n\nFunction:\n```python\ndef find_max(nums: list[int]) -> int:\n    \"\"\"Return the largest integer; raise ValueError on empty input.\"\"\"\n    raise NotImplementedError\n```\n\nTests it must pass:\n```python\nimport unittest\nfrom calc import find_max\n\nclass Tests(unittest.TestCase):\n    def test_example(self):\n        self.assertEqual(find_max([1, 3, 2]), 3)\n\n```",
+        "attempt-1/test_output.txt": ".\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
+        "attempt-1/typecheck_output.txt": "0 errors, 0 warnings, 0 informations\n"
+      }
+    },
+    {
+      "task": "maximum",
+      "seed": 1,
+      "typed": false,
+      "passed": true,
+      "attempts": 1,
+      "wall_seconds": 16.442,
+      "checker_catches": 0,
+      "prompt_tokens": 152,
+      "output_lines": 15,
+      "verdict": "results/ab/maximum-1-untyped/jobs/20261028T125633-08f871f5/verdict.json",
+      "metadata": {
+        "verdict": "pass",
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 1,
+            "prompt_tokens": 152,
+            "output_lines": 15,
+            "verdict": "pass",
+            "test_exit_code": 0,
+            "typecheck_exit_code": null,
+            "model_seconds": 16.1,
+            "reason": "The function iterates through the list of numbers, comparing each number to the current maximum. If a number is found to be greater than the current maximum, it updates the maximum. This process continues until all numbers have been checked, ensuring that the largest number is returned. If the list is empty, a ValueError is raised to indicate that the input is invalid.",
+            "code_lines": 9,
+            "checker_caught_test_miss": false
+          }
+        ],
+        "typecheck_enabled": false,
+        "result_dir": "/home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/maximum-1-untyped/jobs/20261028T125633-08f871f5",
+        "attempt_budget": 3,
+        "checker": null,
+        "attempts": 1,
+        "wall_seconds": 16.291
+      },
+      "artifacts": {
+        "attempt-1/model_reply.txt": "```python\nfrom typing import *\nfrom collections import *\n\ndef find_max(nums: list[int]) -> int:\n    \"\"\"Return the largest integer; raise ValueError on empty input.\"\"\"\n    if not nums:\n        raise ValueError(\"Input list is empty\")\n    max_num = nums[0]\n    for num in nums:\n        if num > max_num:\n            max_num = num\n    return max_num\n\nREASON: The function iterates through the list of numbers, comparing each number to the current maximum. If a number is found to be greater than the current maximum, it updates the maximum. This process continues until all numbers have been checked, ensuring that the largest number is returned. If the list is empty, a ValueError is raised to indicate that the input is invalid.",
+        "attempt-1/prompt.txt": "Write the complete Python function `find_max`. Keep its calling convention and docstring and replace `raise NotImplementedError` with a working implementation. Use only names that already exist in the module. Return one ```python block with only that function, then one line starting with REASON: explaining from first principles why it works.\n\n\nModule header:\n```python\n\n```\n\nFunction:\n```python\ndef find_max(nums: list[int]) -> int:\n    \"\"\"Return the largest integer; raise ValueError on empty input.\"\"\"\n    raise NotImplementedError\n```\n\nTests it must pass:\n```python\nimport unittest\nfrom calc import find_max\n\nclass Tests(unittest.TestCase):\n    def test_example(self):\n        self.assertEqual(find_max([1, 3, 2]), 3)\n\n```",
+        "attempt-1/test_output.txt": ".\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
+        "attempt-1/typecheck_output.txt": "Disabled.\n"
+      }
+    },
+    {
+      "task": "first",
+      "seed": 1,
+      "typed": true,
+      "passed": true,
+      "attempts": 1,
+      "wall_seconds": 18.737,
+      "checker_catches": 0,
+      "prompt_tokens": 194,
+      "output_lines": 9,
+      "verdict": "results/ab/first-1-typed/jobs/20261028T125650-ecab9fe2/verdict.json",
+      "metadata": {
+        "verdict": "pass",
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 1,
+            "prompt_tokens": 194,
+            "output_lines": 9,
+            "verdict": "pass",
+            "test_exit_code": 0,
+            "typecheck_exit_code": 0,
+            "model_seconds": 16.739,
+            "reason": "The function checks if the list is empty. If it is, it returns 0. Otherwise, it returns the first item in the list. This is a straightforward implementation that adheres to the function's contract and passes the provided test case.",
+            "code_lines": 3,
+            "checker_caught_test_miss": false
+          }
+        ],
+        "typecheck_enabled": true,
+        "result_dir": "/home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/first-1-typed/jobs/20261028T125650-ecab9fe2",
+        "attempt_budget": 3,
+        "checker": [
+          "/home/chopp/.npm-global/bin/pyright"
+        ],
+        "attempts": 1,
+        "wall_seconds": 18.502
+      },
+      "artifacts": {
+        "attempt-1/model_reply.txt": "```python\nfrom typing import *\nfrom collections.abc import *\n\ndef first_or_zero(values: list[int]) -> int:\n    \"\"\"Return the first item, or zero for empty input.\"\"\"\n    return values[0] if values else 0\n\nREASON: The function checks if the list is empty. If it is, it returns 0. Otherwise, it returns the first item in the list. This is a straightforward implementation that adheres to the function's contract and passes the provided test case.",
+        "attempt-1/prompt.txt": "Write the complete Python function `first_or_zero`. Keep its calling convention and docstring and replace `raise NotImplementedError` with a working implementation. Use only names that already exist in the module. Return one ```python block with only that function, then one line starting with REASON: explaining from first principles why it works.\nUse explicit parameter and return type annotations on every function you change. Preserve existing annotated contracts. The changed Python files must pass strict static type checking; avoid Any, type: ignore, and checker suppression directives.\n\n\nModule header:\n```python\n\n```\n\nFunction:\n```python\ndef first_or_zero(values: list[int]) -> int:\n    \"\"\"Return the first item, or zero for empty input.\"\"\"\n    raise NotImplementedError\n```\n\nTests it must pass:\n```python\nimport unittest\nfrom calc import first_or_zero\n\nclass Tests(unittest.TestCase):\n    def test_example(self):\n        self.assertEqual(first_or_zero([7, 8]), 7)\n\n```",
+        "attempt-1/test_output.txt": ".\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
+        "attempt-1/typecheck_output.txt": "0 errors, 0 warnings, 0 informations\n"
+      }
+    },
+    {
+      "task": "first",
+      "seed": 1,
+      "typed": false,
+      "passed": true,
+      "attempts": 2,
+      "wall_seconds": 39.696,
+      "checker_catches": 0,
+      "prompt_tokens": 445,
+      "output_lines": 28,
+      "verdict": "results/ab/first-1-untyped/jobs/20261028T125708-c2d03cdc/verdict.json",
+      "metadata": {
+        "verdict": "pass",
+        "jobs": [
+          {
+            "attempt": 1,
+            "seed": 1,
+            "prompt_tokens": 153,
+            "output_lines": 14,
+            "verdict": "fail",
+            "test_exit_code": null,
+            "typecheck_exit_code": null,
+            "model_seconds": 22.183,
+            "reason": "no parsable function"
+          },
+          {
+            "attempt": 2,
+            "seed": 2,
+            "prompt_tokens": 292,
+            "output_lines": 14,
+            "verdict": "pass",
+            "test_exit_code": 0,
+            "typecheck_exit_code": null,
+            "model_seconds": 17.087,
+            "reason": "The function checks if the input list `values` is empty. If it is, it returns `0`. Otherwise, it returns the first item in the list using `values[0]`. This implementation directly addresses the requirements of the function by handling both non-empty and empty lists.",
+            "code_lines": 3,
+            "checker_caught_test_miss": false
+          }
+        ],
+        "typecheck_enabled": false,
+        "result_dir": "/home/chopp/.treehouse/driver-0e4e2f/1/driver/results/ab/first-1-untyped/jobs/20261028T125708-c2d03cdc",
+        "attempt_budget": 3,
+        "checker": null,
+        "attempts": 2,
+        "wall_seconds": 39.471
+      },
+      "artifacts": {
+        "attempt-1/model_reply.txt": "```python\nModule header:\n```python\nfrom typing import *\n```\n\nFunction:\n```python\ndef first_or_zero(values: list[int]) -> int:\n    \"\"\"Return the first item, or zero for empty input.\"\"\"\n    return values[0] if values else 0\n```\n\nREASON: The function checks if the input list `values` is empty. If it is, it returns `0`. Otherwise, it returns the first item in the list using `values[0]`. This implementation directly addresses the requirements of the function by handling both non-empty and empty lists.",
+        "attempt-1/prompt.txt": "Write the complete Python function `first_or_zero`. Keep its calling convention and docstring and replace `raise NotImplementedError` with a working implementation. Use only names that already exist in the module. Return one ```python block with only that function, then one line starting with REASON: explaining from first principles why it works.\n\n\nModule header:\n```python\n\n```\n\nFunction:\n```python\ndef first_or_zero(values: list[int]) -> int:\n    \"\"\"Return the first item, or zero for empty input.\"\"\"\n    raise NotImplementedError\n```\n\nTests it must pass:\n```python\nimport unittest\nfrom calc import first_or_zero\n\nclass Tests(unittest.TestCase):\n    def test_example(self):\n        self.assertEqual(first_or_zero([7, 8]), 7)\n\n```",
+        "attempt-2/model_reply.txt": "```python\nfrom typing import *\nfrom unittest import TestCase\n\ndef first_or_zero(values: list[int]) -> int:\n    \"\"\"Return the first item, or zero for empty input.\"\"\"\n    return values[0] if values else 0\n\nclass Tests(unittest.TestCase):\n    def test_example(self):\n        self.assertEqual(first_or_zero([7, 8]), 7)\n```\n\nREASON: The function checks if the input list `values` is empty. If it is, it returns `0`. Otherwise, it returns the first item in the list using `values[0]`. This implementation directly addresses the requirements of the function by handling both non-empty and empty lists.",
+        "attempt-2/prompt.txt": "Write the complete Python function `first_or_zero`. Keep its calling convention and docstring and replace `raise NotImplementedError` with a working implementation. Use only names that already exist in the module. Return one ```python block with only that function, then one line starting with REASON: explaining from first principles why it works.\n\n\nModule header:\n```python\n\n```\n\nFunction:\n```python\ndef first_or_zero(values: list[int]) -> int:\n    \"\"\"Return the first item, or zero for empty input.\"\"\"\n    raise NotImplementedError\n```\n\nTests it must pass:\n```python\nimport unittest\nfrom calc import first_or_zero\n\nclass Tests(unittest.TestCase):\n    def test_example(self):\n        self.assertEqual(first_or_zero([7, 8]), 7)\n\n```\n\nYour previous reply had no parsable function:\n```python\nModule header:\n```python\nfrom typing import *\n```\n\nFunction:\n```python\ndef first_or_zero(values: list[int]) -> int:\n    \"\"\"Return the first item, or zero for empty input.\"\"\"\n    return values[0] if values else 0\n```\n\nREASON: The function checks if the input list `values` is empty. If it is, it returns `0`. Otherwise, it returns the first item in the list using `values[0]`. This implementation directly addresses the requirements of the function by handling both non-empty and empty lists.\nReturn the complete function in a Python code block.",
+        "attempt-2/test_output.txt": ".\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
+        "attempt-2/typecheck_output.txt": "Disabled.\n"
+      }
+    }
+  ],
+  "labour": {
+    "agy_model": "gpt-oss-120b-medium",
+    "agy_fixture_suggestions": "**Task\u202f1 \u2013 Safe division**\n\n```python\ndef safe_divide(a: float, b: float) -> float:\n    \"\"\"\n    Return the result of ``a / b``.  If *b* is zero the function\n    intentionally omits a return statement (so a strict type checker\n    reports a missing\u2011return error for that branch).\n    \"\"\"\n    if b == 0.0:\n        # BUG: missing return \u2013 a type\u2011checker will flag this\n        pass\n    else:\n        return a / b\n```\n\n*Weak unittest (passes for non\u2011zero divisor but does not test the zero case)*  \n\n```python\nimport unittest\n\nclass TestSafeDivide(unittest.TestCase):\n    def test_nonzero(self):\n        self.assertIsInstance(safe_divide(10.0, 2.0), float)\n```\n\n---\n\n**Task\u202f2 \u2013 Simple string concatenation**\n\n```python\ndef concat_strings(s1: str, s2: str) -> str:\n    \"\"\"\n    Concatenate *s1* and *s2* without any separator.\n    The implementation is deliberately trivial.\n    \"\"\"\n    return s1 + s2\n```\n\n*Weak unittest (only checks the type, not the actual content)*  \n\n```python\nimport unittest\n\nclass TestConcatStrings(unittest.TestCase):\n    def test_type(self):\n        self.assertIsInstance(concat_strings(\"foo\", \"bar\"), str)\n```\n\n---\n\n**Task\u202f3 \u2013 Maximum of a list**\n\n```python\ndef find_max(nums: list[int]) -> int:\n    \"\"\"\n    Return the largest integer in *nums*.\n    For an empty list the function falls off the end without\n    returning anything \u2013 a strict type checker will flag the\n    missing return.\n    \"\"\"\n    if not nums:\n        # BUG: missing return \u2013 a type\u2011checker will flag this\n        pass\n    current = nums[0]\n    for n in nums[1:]:\n        if n > current:\n            current = n\n    return current\n```\n\n*Weak unittest (covers a normal list but not the empty\u2011list edge case)*  \n\n```python\nimport unittest\n\nclass TestFindMax(unittest.TestCase):\n    def test_basic(self):\n        self.assertIsInstance(find_max([1, 3, 2]), int)\n```\n",
+    "qwen_parser_metadata": {
+      "verdict": "fail",
+      "jobs": [
+        {
+          "attempt": 1,
+          "seed": 0,
+          "prompt_tokens": 241,
+          "output_lines": 14,
+          "verdict": "fail",
+          "test_exit_code": 1,
+          "typecheck_exit_code": 0,
+          "model_seconds": 17.376,
+          "reason": "The function splits the input string into lines and iterates through them. It checks each line to see if it starts with the case-insensitive string 'reason:'. If it finds such a line, it returns the substring after 'reason:'. If no such line is found, it returns an empty string.",
+          "code_lines": 7,
+          "checker_caught_test_miss": false
+        },
+        {
+          "attempt": 2,
+          "seed": 1,
+          "prompt_tokens": 493,
+          "output_lines": 12,
+          "verdict": "fail",
+          "test_exit_code": 1,
+          "typecheck_exit_code": 0,
+          "model_seconds": 12.896,
+          "reason": "The function splits the input string into lines and iterates through them. It checks each line to see if it starts with 'reason:'. If it does, it returns the substring after 'reason:'. If no such line is found, it returns an empty string.",
+          "code_lines": 7,
+          "checker_caught_test_miss": false
+        },
+        {
+          "attempt": 3,
+          "seed": 2,
+          "prompt_tokens": 493,
+          "output_lines": 19,
+          "verdict": "fail",
+          "test_exit_code": 1,
+          "typecheck_exit_code": 0,
+          "model_seconds": 22.55,
+          "reason": "The function `reason_line` splits the input `reply` into lines and iterates through them. It checks each line to see if it starts with the case-insensitive string 'reason:'. If it finds such a line, it returns the substring following 'reason:' after stripping any leading or trailing whitespace. If no such line is found, it returns an empty string. The test cases cover various scenarios, including lines with leading or trailing whitespace, lines with multiple 'reason:' lines, and lines without any 'reason:' line.",
+          "code_lines": 7,
+          "checker_caught_test_miss": false
+        }
+      ],
+      "typecheck_enabled": true,
+      "result_dir": "/home/chopp/.treehouse/driver-0e4e2f/1/driver/results/labour/qwen-fill/20261028T125125-f07a2cd4",
+      "attempt_budget": 3,
+      "checker": [
+        "/home/chopp/.npm-global/bin/pyright"
+      ],
+      "attempts": 3,
+      "wall_seconds": 54.927
+    },
+    "qwen_parser_replies": [
+      "```python\nfrom typing import *\nfrom collections import *\n\ndef reason_line(reply: str) -> str:\n    \"\"\"Return the explanation after the first case-insensitive REASON: line.\"\"\"\n    lines = reply.split('\\n')\n    for line in lines:\n        if line.lower().startswith('reason:'):\n            return line[7:].strip()\n    return ''\n\nREASON: The function splits the input string into lines and iterates through them. It checks each line to see if it starts with the case-insensitive string 'reason:'. If it finds such a line, it returns the substring after 'reason:'. If no such line is found, it returns an empty string.\n```",
+      "```python\ndef reason_line(reply: str) -> str:\n    \"\"\"Return the explanation after the first case-insensitive REASON: line.\"\"\"\n    lines = reply.split('\\n')\n    for line in lines:\n        if line.lower().startswith('reason:'):\n            return line[7:].strip()\n    return ''\n\n\nREASON: The function splits the input string into lines and iterates through them. It checks each line to see if it starts with 'reason:'. If it does, it returns the substring after 'reason:'. If no such line is found, it returns an empty string.\n```",
+      "```python\nfrom typing import *\nfrom collections import *\n\ndef reason_line(reply: str) -> str:\n    \"\"\"Return the explanation after the first case-insensitive REASON: line.\"\"\"\n    lines = reply.split('\\n')\n    for line in lines:\n        if line.lower().startswith('reason:'):\n            return line[7:].strip()\n    return ''\n\nclass ExplanationTests(unittest.TestCase):\n    def test_reason(self):\n        self.assertEqual(reason_line('code\\nREASON: because: types\\nREASON: later'), 'because: types')\n        self.assertEqual(reason_line('  reason: hello  \\n'), 'hello')\n        self.assertEqual(reason_line('no explanation'), '')\n\nREASON: The function `reason_line` splits the input `reply` into lines and iterates through them. It checks each line to see if it starts with the case-insensitive string 'reason:'. If it finds such a line, it returns the substring following 'reason:' after stripping any leading or trailing whitespace. If no such line is found, it returns an empty string. The test cases cover various scenarios, including lines with leading or trailing whitespace, lines with multiple 'reason:' lines, and lines without any 'reason:' line."
+    ],
+    "qwen_parser_note": "All three rejected by tests; initial checker config was not yet corrected, so these are not validation evidence."
+  },
+  "quota": {
+    "codex_weekly_remaining_before": 90,
+    "codex_weekly_remaining_after": 89,
+    "codex_session_remaining_before": 92,
+    "codex_session_remaining_after": 86
+  }
+}

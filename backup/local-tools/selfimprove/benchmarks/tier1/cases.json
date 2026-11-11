@@ -1,0 +1,897 @@
+[
+  {
+    "id": "arithmetic-01",
+    "signature": "def solve(a, b):",
+    "instruction": "Return the sum of two integers.",
+    "checks": [
+      {
+        "args": [
+          2,
+          3
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          -4,
+          7
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          0,
+          0
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "arithmetic-02",
+    "signature": "def solve(a, b):",
+    "instruction": "Return a minus b.",
+    "checks": [
+      {
+        "args": [
+          8,
+          3
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          3,
+          8
+        ],
+        "expected": -5
+      },
+      {
+        "args": [
+          0,
+          0
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "arithmetic-03",
+    "signature": "def solve(a, b):",
+    "instruction": "Return the product of two integers.",
+    "checks": [
+      {
+        "args": [
+          4,
+          5
+        ],
+        "expected": 20
+      },
+      {
+        "args": [
+          -3,
+          2
+        ],
+        "expected": -6
+      },
+      {
+        "args": [
+          0,
+          9
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "arithmetic-04",
+    "signature": "def solve(n):",
+    "instruction": "Return the integer square.",
+    "checks": [
+      {
+        "args": [
+          4
+        ],
+        "expected": 16
+      },
+      {
+        "args": [
+          -3
+        ],
+        "expected": 9
+      },
+      {
+        "args": [
+          0
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "arithmetic-05",
+    "signature": "def solve(n):",
+    "instruction": "Return the absolute value of an integer.",
+    "checks": [
+      {
+        "args": [
+          -8
+        ],
+        "expected": 8
+      },
+      {
+        "args": [
+          7
+        ],
+        "expected": 7
+      },
+      {
+        "args": [
+          0
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "arithmetic-06",
+    "signature": "def solve(n):",
+    "instruction": "Return a boolean indicating whether n is even.",
+    "checks": [
+      {
+        "args": [
+          4
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          3
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          -2
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "arithmetic-07",
+    "signature": "def solve(a, b):",
+    "instruction": "Return the greater integer.",
+    "checks": [
+      {
+        "args": [
+          2,
+          5
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          8,
+          1
+        ],
+        "expected": 8
+      },
+      {
+        "args": [
+          -2,
+          -2
+        ],
+        "expected": -2
+      }
+    ]
+  },
+  {
+    "id": "arithmetic-08",
+    "signature": "def solve(a, b):",
+    "instruction": "Return the smaller integer.",
+    "checks": [
+      {
+        "args": [
+          2,
+          5
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          8,
+          1
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          -2,
+          -2
+        ],
+        "expected": -2
+      }
+    ]
+  },
+  {
+    "id": "arithmetic-09",
+    "signature": "def solve(n, lower, upper):",
+    "instruction": "Clamp integer n to the inclusive bounds lower and upper.",
+    "checks": [
+      {
+        "args": [
+          0,
+          2,
+          5
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          9,
+          2,
+          5
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          3,
+          2,
+          5
+        ],
+        "expected": 3
+      }
+    ]
+  },
+  {
+    "id": "arithmetic-10",
+    "signature": "def solve(n):",
+    "instruction": "Return the sum of integers from 1 through nonnegative n.",
+    "checks": [
+      {
+        "args": [
+          0
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          1
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          5
+        ],
+        "expected": 15
+      }
+    ]
+  },
+  {
+    "id": "string-01",
+    "signature": "def solve(text):",
+    "instruction": "Return the reversed string.",
+    "checks": [
+      {
+        "args": [
+          "abc"
+        ],
+        "expected": "cba"
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          "a b"
+        ],
+        "expected": "b a"
+      }
+    ]
+  },
+  {
+    "id": "string-02",
+    "signature": "def solve(text):",
+    "instruction": "Return the uppercase string.",
+    "checks": [
+      {
+        "args": [
+          "abc"
+        ],
+        "expected": "ABC"
+      },
+      {
+        "args": [
+          "a1!"
+        ],
+        "expected": "A1!"
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": ""
+      }
+    ]
+  },
+  {
+    "id": "string-03",
+    "signature": "def solve(text):",
+    "instruction": "Return the lowercase string.",
+    "checks": [
+      {
+        "args": [
+          "ABC"
+        ],
+        "expected": "abc"
+      },
+      {
+        "args": [
+          "A1!"
+        ],
+        "expected": "a1!"
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": ""
+      }
+    ]
+  },
+  {
+    "id": "string-04",
+    "signature": "def solve(text):",
+    "instruction": "Remove leading and trailing whitespace.",
+    "checks": [
+      {
+        "args": [
+          " hi "
+        ],
+        "expected": "hi"
+      },
+      {
+        "args": [
+          "\tx\n"
+        ],
+        "expected": "x"
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": ""
+      }
+    ]
+  },
+  {
+    "id": "string-05",
+    "signature": "def solve(text, needle):",
+    "instruction": "Count occurrences of a single-character needle.",
+    "checks": [
+      {
+        "args": [
+          "banana",
+          "a"
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          "banana",
+          "z"
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "",
+          "a"
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "string-06",
+    "signature": "def solve(text):",
+    "instruction": "Return whether the string equals its reverse, case sensitive.",
+    "checks": [
+      {
+        "args": [
+          "aba"
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          "ab"
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "string-07",
+    "signature": "def solve(text):",
+    "instruction": "Count whitespace-separated words.",
+    "checks": [
+      {
+        "args": [
+          "one two"
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          " one\t two\nthree "
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "string-08",
+    "signature": "def solve(text):",
+    "instruction": "Replace literal space characters with hyphens.",
+    "checks": [
+      {
+        "args": [
+          "a b"
+        ],
+        "expected": "a-b"
+      },
+      {
+        "args": [
+          " a "
+        ],
+        "expected": "-a-"
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": ""
+      }
+    ]
+  },
+  {
+    "id": "string-09",
+    "signature": "def solve(text):",
+    "instruction": "Return the first character, or empty string for empty input.",
+    "checks": [
+      {
+        "args": [
+          "abc"
+        ],
+        "expected": "a"
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          "!"
+        ],
+        "expected": "!"
+      }
+    ]
+  },
+  {
+    "id": "string-10",
+    "signature": "def solve(text):",
+    "instruction": "Count ASCII vowels a e i o u, ignoring case.",
+    "checks": [
+      {
+        "args": [
+          "AEi!"
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          "rhythm"
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "hello"
+        ],
+        "expected": 2
+      }
+    ]
+  },
+  {
+    "id": "list-01",
+    "signature": "def solve(values):",
+    "instruction": "Return the sum of integer list elements.",
+    "checks": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": 6
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            -2,
+            2
+          ]
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "list-02",
+    "signature": "def solve(values):",
+    "instruction": "Return a sorted list of the integers.",
+    "checks": [
+      {
+        "args": [
+          [
+            3,
+            1,
+            2
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            2,
+            2,
+            -1
+          ]
+        ],
+        "expected": [
+          -1,
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "list-03",
+    "signature": "def solve(values):",
+    "instruction": "Return even integers in their original order.",
+    "checks": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            4,
+            3
+          ]
+        ],
+        "expected": [
+          2,
+          4
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            -2,
+            -1,
+            0
+          ]
+        ],
+        "expected": [
+          -2,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "list-04",
+    "signature": "def solve(values):",
+    "instruction": "Return the list with duplicates removed, preserving first occurrence order.",
+    "checks": [
+      {
+        "args": [
+          [
+            2,
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          2,
+          1,
+          3
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            0,
+            0
+          ]
+        ],
+        "expected": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "list-05",
+    "signature": "def solve(values):",
+    "instruction": "Return a reversed copy of the list.",
+    "checks": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          3,
+          2,
+          1
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            4
+          ]
+        ],
+        "expected": [
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "id": "list-06",
+    "signature": "def solve(values):",
+    "instruction": "Return a list with each integer doubled.",
+    "checks": [
+      {
+        "args": [
+          [
+            1,
+            -2
+          ]
+        ],
+        "expected": [
+          2,
+          -4
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            0
+          ]
+        ],
+        "expected": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "list-07",
+    "signature": "def solve(values):",
+    "instruction": "Count strictly positive integers.",
+    "checks": [
+      {
+        "args": [
+          [
+            -1,
+            0,
+            1,
+            2
+          ]
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            -4
+          ]
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "list-08",
+    "signature": "def solve(values, needle):",
+    "instruction": "Return first index of needle or -1 if absent.",
+    "checks": [
+      {
+        "args": [
+          [
+            4,
+            7,
+            4
+          ],
+          4
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            4,
+            7
+          ],
+          9
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          [],
+          1
+        ],
+        "expected": -1
+      }
+    ]
+  },
+  {
+    "id": "list-09",
+    "signature": "def solve(values):",
+    "instruction": "Return cumulative sums as a list.",
+    "checks": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          1,
+          3,
+          6
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            -1,
+            2
+          ]
+        ],
+        "expected": [
+          -1,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "list-10",
+    "signature": "def solve(values):",
+    "instruction": "Flatten one level of a list of integer lists.",
+    "checks": [
+      {
+        "args": [
+          [
+            [
+              1,
+              2
+            ],
+            [],
+            [
+              3
+            ]
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            [],
+            []
+          ]
+        ],
+        "expected": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "verdict": "pass",
+  "typecheck_enabled": true,
+  "jobs": [
+    {
+      "attempt": 1,
+      "prompt_tokens": 400,
+      "output_lines": 15,
+      "verdict": "pass",
+      "model_seconds": 8.0,
+      "typecheck_exit_code": 0
+    },
+    {
+      "attempt": 2,
+      "prompt_tokens": 1200,
+      "output_lines": 45,
+      "verdict": "pass",
+      "model_seconds": 18.0,
+      "typecheck_exit_code": 0
+    }
+  ]
+}

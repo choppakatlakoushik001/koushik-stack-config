@@ -1,0 +1,100 @@
+[
+  {
+    "id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+    "sha": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+    "lastModified": "2026-10-29T14:30:00.000Z",
+    "tags": ["gguf", "code", "coder", "conversational"],
+    "downloads": 15420,
+    "siblings": [
+      {"rfilename": "README.md", "size": 5120},
+      {"rfilename": "qwen2.5-coder-7b-instruct-q4_k_m.gguf", "size": 4683073536}
+    ]
+  },
+  {
+    "id": "Qwen/Qwen2.5-Coder-32B-Instruct-GGUF",
+    "sha": "32fb94bfda8c8cf22497dc57b78f391a9acb426a",
+    "lastModified": "2026-10-28T10:00:00.000Z",
+    "tags": ["gguf", "code", "coder"],
+    "downloads": 8200,
+    "siblings": [
+      {"rfilename": "qwen2.5-coder-32b-instruct-q4_k_m.gguf", "size": 19400000000}
+    ]
+  },
+  {
+    "id": "bartowski/Qwen2.5-Coder-1.5B-Instruct-GGUF",
+    "sha": "b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0",
+    "lastModified": "2026-10-30T09:15:00.000Z",
+    "tags": ["gguf", "code", "coder"],
+    "downloads": 3200,
+    "siblings": [
+      {"rfilename": "Qwen2.5-Coder-1.5B-Instruct-Q4_K_M.gguf", "size": 986000000}
+    ]
+  },
+  {
+    "id": "unsloth/Qwen2.5-Coder-14B-Instruct-GGUF",
+    "sha": "14fb94bfda8c8cf22497dc57b78f391a9acb426a",
+    "lastModified": "2026-10-27T18:00:00.000Z",
+    "tags": ["gguf", "code", "coder"],
+    "downloads": 5100,
+    "siblings": [
+      {"rfilename": "Qwen2.5-Coder-14B-Instruct-Q4_K_M.gguf", "size": 8900000000}
+    ]
+  },
+  {
+    "id": "microsoft/Phi-3.5-mini-instruct-GGUF",
+    "sha": "c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0",
+    "lastModified": "2026-10-29T12:00:00.000Z",
+    "tags": ["gguf", "instruct"],
+    "downloads": 12000,
+    "siblings": [
+      {"rfilename": "Phi-3.5-mini-instruct-Q4_K_M.gguf", "size": 2390000000}
+    ]
+  },
+  {
+    "id": "Qwen/Qwen2-Audio-7B-GGUF",
+    "sha": "2afb94bfda8c8cf22497dc57b78f391a9acb426a",
+    "lastModified": "2026-10-29T08:00:00.000Z",
+    "tags": ["gguf", "audio"],
+    "downloads": 900,
+    "siblings": [
+      {"rfilename": "qwen2-audio-7b-q4_k_m.gguf", "size": 4500000000}
+    ]
+  },
+  {
+    "id": "lmstudio-community/Qwen2.5-Coder-3B-GGUF",
+    "sha": "03fb94bfda8c8cf22497dc57b78f391a9acb426a",
+    "lastModified": "2026-10-01T00:00:00.000Z",
+    "tags": ["gguf", "code", "coder"],
+    "downloads": 20000,
+    "siblings": [
+      {"rfilename": "qwen2.5-coder-3b-q4_k_m.gguf", "size": 1950000000}
+    ]
+  },
+  {
+    "id": "google/gemma-2-2b-it-GGUF",
+    "sha": "d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0",
+    "lastModified": "2026-10-28T16:00:00.000Z",
+    "tags": ["gguf", "instruct"],
+    "downloads": 7500,
+    "siblings": [
+      {"rfilename": "gemma-2-2b-it-Q4_K_M.gguf", "size": 1630000000}
+    ]
+  },
+  {
+    "id": "mistralai/Mistral-7B-Instruct-v0.3",
+    "sha": "7bfb94bfda8c8cf22497dc57b78f391a9acb426a",
+    "lastModified": "2026-10-29T11:00:00.000Z",
+    "tags": ["pytorch", "safetensors"],
+    "downloads": 50000,
+    "siblings": [
+      {"rfilename": "model-00001-of-00003.safetensors", "size": 4900000000}
+    ]
+  },
+  {
+    "id": "unsloth/Incomplete-Metadata-Model-GGUF",
+    "lastModified": "2026-10-30T10:00:00.000Z",
+    "tags": ["gguf", "coder"],
+    "downloads": 100,
+    "siblings": []
+  }
+]

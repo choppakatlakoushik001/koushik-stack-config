@@ -1,0 +1,164 @@
+{
+  "huggingface": [
+    {
+      "id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+      "sha": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+      "lastModified": "2026-10-29T14:30:00.000Z",
+      "tags": ["gguf", "code", "coder"],
+      "downloads": 15420,
+      "siblings": [
+        {"rfilename": "qwen2.5-coder-7b-instruct-q4_k_m.gguf", "size": 4683073536}
+      ]
+    },
+    {
+      "id": "bartowski/Qwen2.5-Coder-1.5B-Instruct-GGUF",
+      "sha": "b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0",
+      "lastModified": "2026-10-30T09:15:00.000Z",
+      "tags": ["gguf", "code", "coder"],
+      "downloads": 3200,
+      "siblings": [
+        {"rfilename": "Qwen2.5-Coder-1.5B-Instruct-Q4_K_M.gguf", "size": 986000000}
+      ]
+    }
+  ],
+  "ollama": [
+    {
+      "name": "qwen2.5-coder:7b",
+      "modified_at": "2026-10-30T10:00:00Z",
+      "size": 4700000000,
+      "details": {"format": "gguf", "family": "qwen2", "parameter_size": "7B", "quantization_level": "Q4_K_M"}
+    },
+    {
+      "name": "starcoder2:3b",
+      "modified_at": "2026-10-28T10:00:00Z",
+      "size": 1800000000,
+      "details": {"format": "gguf", "family": "starcoder", "parameter_size": "3B", "quantization_level": "Q4_K_M"}
+    }
+  ],
+  "lmstudio": [
+    {
+      "id": "lmstudio-community/Qwen2.5-Coder-7B-Instruct-GGUF",
+      "sha": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+      "lastModified": "2026-10-29T12:00:00Z",
+      "tags": ["gguf", "code", "coder"],
+      "downloads": 5000,
+      "siblings": [
+        {"rfilename": "qwen2.5-coder-7b-instruct-q4_k_m.gguf", "size": 4683073536}
+      ]
+    }
+  ],
+  "modelscope": {
+    "data": {
+      "Model": [
+        {
+          "Name": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+          "UpdatedAt": "2026-10-30T08:00:00Z",
+          "Tags": ["code", "coder", "gguf"],
+          "FileCount": 4
+        },
+        {
+          "Name": "deepseek-ai/DeepSeek-Coder-1.3B-GGUF",
+          "UpdatedAt": "2026-10-29T09:00:00Z",
+          "Tags": ["code", "gguf"],
+          "FileCount": 3
+        }
+      ]
+    }
+  },
+  "kaggle": {
+    "models": [
+      {
+        "owner": "qwen",
+        "title": "qwen2.5-coder-7b-gguf",
+        "lastUpdated": "2026-10-29T10:00:00Z",
+        "framework": "GGUF"
+      }
+    ]
+  },
+  "github": {
+    "items": [
+      {
+        "full_name": "Qwen/Qwen2.5-Coder-7B-GGUF",
+        "pushed_at": "2026-10-30T10:00:00Z",
+        "description": "GGUF format weights for Qwen 2.5 Coder 7B"
+      }
+    ]
+  },
+  "jan": {
+    "data": [
+      {
+        "id": "qwen2.5-coder-7b-instruct",
+        "format": "gguf",
+        "source": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+        "size": 4683073536,
+        "updated_at": "2026-10-29T12:00:00Z"
+      }
+    ]
+  },
+  "gpt4all": {
+    "models": [
+      {
+        "name": "Qwen2.5 Coder 7B Instruct",
+        "filename": "qwen2.5-coder-7b-instruct-q4_k_m.gguf",
+        "filesize": 4683073536,
+        "format": "gguf",
+        "type": "coder",
+        "released": "2026-10-28"
+      }
+    ]
+  },
+  "llamafile": [
+    {
+      "tag_name": "0.8.14",
+      "name": "llamafile 0.8.14 release",
+      "published_at": "2026-10-28T12:00:00Z",
+      "assets": [
+        {
+          "name": "qwen2.5-coder-3b-instruct.llamafile",
+          "size": 2200000000
+        }
+      ]
+    }
+  ],
+  "wisemodel": {
+    "data": {
+      "models": [
+        {
+          "name": "Qwen2.5-Coder-7B-GGUF",
+          "updated_at": "2026-10-29T14:00:00Z",
+          "format": "gguf"
+        }
+      ]
+    }
+  },
+  "civitai": {
+    "items": [
+      {
+        "id": 12345,
+        "name": "CodeAssistant Python Coder Model",
+        "type": "LLM",
+        "updatedAt": "2026-10-29T12:00:00Z"
+      }
+    ]
+  },
+  "apple_coreml": [
+    {
+      "id": "apple/coreml-code-assist",
+      "lastModified": "2026-10-28T10:00:00Z",
+      "tags": ["coreml", "code"]
+    }
+  ],
+  "onnx_model_zoo": [
+    {
+      "name": "code-completion.onnx",
+      "size": 350000000,
+      "path": "text/code-completion.onnx"
+    }
+  ],
+  "openmmlab": [
+    {
+      "name": "mmcode",
+      "description": "OpenMMLab Code Intelligence models"
+    }
+  ]
+}

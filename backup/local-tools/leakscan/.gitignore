@@ -1,0 +1,4 @@
+findings.jsonl
+__pycache__/
+*.py[cod]
+.pytest_cache/

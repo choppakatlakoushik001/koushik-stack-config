@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "cases": [
+    "arithmetic-01",
+    "arithmetic-02",
+    "arithmetic-03",
+    "arithmetic-04",
+    "arithmetic-05",
+    "arithmetic-06",
+    "arithmetic-07",
+    "arithmetic-08",
+    "arithmetic-09",
+    "arithmetic-10",
+    "string-01",
+    "string-02",
+    "string-03",
+    "string-04",
+    "string-05",
+    "string-06",
+    "string-07",
+    "string-08",
+    "string-09",
+    "string-10",
+    "list-01",
+    "list-02",
+    "list-03",
+    "list-04",
+    "list-05",
+    "list-06",
+    "list-07",
+    "list-08",
+    "list-09",
+    "list-10"
+  ],
+  "files": [
+    "benchmarks/tier1/cases.json",
+    "benchmarks/tier1/protocol.md",
+    "benchmarks/tier1/score.py"
+  ],
+  "sha256": "177105e135b01eb074728ed7705ea0ca6bfa731d2ca0875e52175c391dc21dd7"
+}

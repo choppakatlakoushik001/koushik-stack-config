@@ -1,0 +1,16 @@
+{
+  "typecheck_enabled": false,
+  "jobs": [
+    {
+      "verdict": "fail"
+    },
+    {
+      "prompt_tokens": 250,
+      "verdict": "pass"
+    },
+    {
+      "output_lines": 5,
+      "verdict": "fail"
+    }
+  ]
+}

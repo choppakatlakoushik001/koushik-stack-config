@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "repo": "/home/chopp/local-llm/driver/selftest/fail",
+  "base_commit": "c5445537e8f699015637af0654357b4e230bf215",
+  "allowed_paths": [
+    "calc.py"
+  ],
+  "line_ranges": {
+    "calc.py": [
+      {
+        "start": 1,
+        "end": 2
+      }
+    ]
+  },
+  "test_command": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_calc.py",
+    "-q"
+  ],
+  "acceptance": "Change choose so it returns its input plus four (for input 4, return 8). Do not edit tests.",
+  "token_estimate": 3000
+}

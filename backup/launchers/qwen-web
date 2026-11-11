@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+"$HOME/.local/bin/qwen-server" start
+printf 'Qwen Web UI: http://127.0.0.1:8080/\n'

@@ -1,0 +1,8 @@
+{
+  "verdict": "pass",
+  "started_at": "2026-10-22T17:13:26+00:00",
+  "finished_at": "2026-10-22T17:13:41+00:00",
+  "test_exit_code": 0,
+  "prompt_tokens": 131,
+  "model_seconds": 13.392
+}

@@ -1,0 +1,194 @@
+#!/usr/bin/env bash
+set -u
+
+MODEL="$HOME/local-llm/models/Qwen2.5-Coder-3B-Instruct/qwen2.5-coder-3b-instruct-q4_k_m.gguf"
+CPU_SERVER="$HOME/local-llm/llama.cpp/src/build/bin/llama-server"
+GPU_SERVER="$HOME/local-llm/llama.cpp/src/build-cuda132/bin/llama-server"
+SERVER="$CPU_SERVER"
+GPU_LAYERS=0
+CTX_SIZE=4096
+EXTRA_ARGS=()
+PROFILE_FILE="$HOME/local-llm/run/qwen-runtime-profile.json"
+RUN_DIR="$HOME/local-llm/run"
+PID_FILE="$RUN_DIR/qwen-server.pid"
+LOG_FILE="$RUN_DIR/qwen-server.log"
+BASE_URL="http://127.0.0.1:8080"
+
+is_our_server() {
+    local pid="$1" cmdline
+    [[ "$pid" =~ ^[0-9]+$ && -r "/proc/$pid/cmdline" ]] || return 1
+    cmdline=$(tr '\0' ' ' < "/proc/$pid/cmdline")
+    [[ ( "$cmdline" == "$CPU_SERVER "* || "$cmdline" == "$GPU_SERVER "* ) && "$cmdline" == *"--model $MODEL "* && "$cmdline" == *"--port 8080"* && "$cmdline" == *"--host 127.0.0.1"* ]]
+}
+
+read_pid() {
+    [[ -r "$PID_FILE" ]] || return 1
+    local pid
+    pid=$(<"$PID_FILE")
+    [[ "$pid" =~ ^[0-9]+$ ]] || return 2
+    printf '%s' "$pid"
+}
+
+start_server_once() {
+    mkdir -p "$RUN_DIR"
+    if [[ -e "$PID_FILE" ]]; then
+        local pid
+        if pid=$(read_pid); then
+            if kill -0 "$pid" 2>/dev/null; then
+                if is_our_server "$pid"; then
+                    echo "Qwen server already running (pid $pid) at $BASE_URL"
+                    curl -fsS "$BASE_URL/health" >/dev/null && return 0
+                    echo "Qwen server process exists but health check is not ready" >&2
+                    return 1
+                fi
+                echo "Refusing to use PID file: pid $pid is not this Qwen server" >&2
+                return 1
+            fi
+        elif [[ $? -eq 2 ]]; then
+            echo "Refusing malformed PID file: $PID_FILE" >&2
+            return 1
+        fi
+        rm -f -- "$PID_FILE"
+    fi
+    [[ -x "$SERVER" ]] || { echo "llama-server is missing: $SERVER" >&2; return 1; }
+    [[ -r "$MODEL" ]] || { echo "Qwen model is missing: $MODEL" >&2; return 1; }
+
+    # A separate session keeps the on-demand server alive after this shell exits.
+    setsid bash -c 'printf "%s\n" "$$" > "$1"; shift; exec "$@"' \
+        qwen-server-daemon "$PID_FILE" "$SERVER" \
+        --model "$MODEL" \
+        --host 127.0.0.1 --port 8080 --cors-origins localhost \
+        --threads 4 --ctx-size "$CTX_SIZE" --parallel 1 --gpu-layers "$GPU_LAYERS" \
+        --load-mode mmap --ui "${EXTRA_ARGS[@]}" \
+        >>"$LOG_FILE" 2>&1 </dev/null &
+    local launcher_pid=$! pid=''
+    for _ in $(seq 1 180); do
+        pid=$(cat "$PID_FILE" 2>/dev/null || true)
+        if curl -fsS "$BASE_URL/health" >/dev/null 2>&1; then
+            echo "Qwen server ready (pid ${pid:-unknown}) at $BASE_URL"
+            return 0
+        fi
+        if [[ "$pid" =~ ^[0-9]+$ ]] && ! kill -0 "$pid" 2>/dev/null; then
+            echo "Qwen server exited during startup; recent log:" >&2
+            tail -n 40 "$LOG_FILE" >&2 || true
+            [[ "$(cat "$PID_FILE" 2>/dev/null || true)" == "$pid" ]] && rm -f -- "$PID_FILE"
+            return 1
+        fi
+        if ! kill -0 "$launcher_pid" 2>/dev/null && [[ ! "$pid" =~ ^[0-9]+$ ]]; then
+            echo "Qwen launcher exited before writing its PID file; recent log:" >&2
+            tail -n 40 "$LOG_FILE" >&2 || true
+            return 1
+        fi
+        sleep 1
+    done
+    echo "Qwen server did not become ready; leaving pid ${pid:-unknown} available for inspection" >&2
+    return 1
+}
+
+stop_server() {
+    local pid
+    if [[ ! -e "$PID_FILE" ]]; then
+        echo "Qwen server is not running (no PID file)"
+        return 0
+    fi
+    if ! pid=$(read_pid); then
+        echo "Refusing malformed PID file: $PID_FILE" >&2
+        return 1
+    fi
+    if ! kill -0 "$pid" 2>/dev/null; then
+        [[ "$(cat "$PID_FILE" 2>/dev/null || true)" == "$pid" ]] && rm -f -- "$PID_FILE"
+        echo "Removed stale Qwen PID file; server is not running"
+        return 0
+    fi
+    if ! is_our_server "$pid"; then
+        echo "Refusing to signal pid $pid: it is not this Qwen server" >&2
+        return 1
+    fi
+    kill -TERM "$pid"
+    for _ in $(seq 1 100); do
+        if ! kill -0 "$pid" 2>/dev/null; then
+            [[ "$(cat "$PID_FILE" 2>/dev/null || true)" == "$pid" ]] && rm -f -- "$PID_FILE"
+            echo "Qwen server stopped (pid $pid)"
+            return 0
+        fi
+        # An exiting process briefly has an empty cmdline; only a non-empty foreign one is a reused pid.
+        if [[ -s /proc/$pid/cmdline ]] && ! is_our_server "$pid"; then
+            echo "pid $pid no longer identifies this Qwen server; not signaling again" >&2
+            return 1
+        fi
+        sleep 0.1
+    done
+    echo "Qwen server pid $pid did not stop after SIGTERM; leaving it running" >&2
+    return 1
+}
+
+show_status() {
+    local pid
+    if [[ ! -e "$PID_FILE" ]]; then
+        echo "Qwen server stopped"
+        return 0
+    fi
+    if ! pid=$(read_pid); then
+        echo "Malformed PID file: $PID_FILE"
+        return 1
+    fi
+    if ! kill -0 "$pid" 2>/dev/null; then
+        echo "Qwen server stopped (stale PID file: $pid)"
+        return 1
+    fi
+    if ! is_our_server "$pid"; then
+        echo "PID $pid belongs to a different process; refusing to classify or signal it" >&2
+        return 1
+    fi
+    if curl -fsS "$BASE_URL/health" >/dev/null 2>&1; then
+        echo "Qwen server running (pid $pid), healthy at $BASE_URL"
+    else
+        echo "Qwen server running (pid $pid), health endpoint not ready"
+        return 1
+    fi
+}
+
+start_server() {
+    if [[ -r "$HOME/local-llm/guard/hold.flag" ]] && [[ $(cat "$HOME/local-llm/guard/hold.flag") == manual ]]; then
+        echo 'error: manual pause is active'; return 1
+    fi
+    local chosen="${QWEN_PROFILE:-auto}"
+    if [[ "$chosen" == auto ]]; then
+        chosen=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["selected"])' "$PROFILE_FILE") || return 1
+    fi
+    case "$chosen" in
+      cpu4) SERVER="$CPU_SERVER"; GPU_LAYERS=0 ;;
+      gpu8) SERVER="$GPU_SERVER"; GPU_LAYERS=8 ;;
+      gpu16) SERVER="$GPU_SERVER"; GPU_LAYERS=16 ;;
+      # llm-speedup-b confirmation run (2026-10-27): least CPU work, same test results.
+      gpu14_ngram) SERVER="$GPU_SERVER"; GPU_LAYERS=14; CTX_SIZE=4608; EXTRA_ARGS=(--spec-type ngram-mod) ;;
+      # local-model-ab-test head-to-head (2026-10-31): 9.7 vs 7.3 tok/s, same TTFT and answers; captain approved as default.
+      gpu24_ngram) SERVER="$GPU_SERVER"; GPU_LAYERS=24; CTX_SIZE=4608; EXTRA_ARGS=(--spec-type ngram-mod) ;;
+      *) echo 'error: QWEN_PROFILE must be auto, cpu4, gpu8, gpu16, gpu14_ngram or gpu24_ngram'; return 2 ;;
+    esac
+    if [[ "$GPU_LAYERS" != 0 ]]; then source "$HOME/local-llm/run/qwen-cuda-env.sh"; fi
+    if start_server_once; then return 0; fi
+    if [[ "$GPU_LAYERS" == 24 ]]; then
+        echo 'GPU 24-layer startup failed; falling back to the 14-layer profile'
+        stop_server || return 1
+        GPU_LAYERS=14
+        if start_server_once; then return 0; fi
+    fi
+    if [[ "$GPU_LAYERS" != 0 ]]; then
+        echo 'GPU startup failed; falling back to preserved CPU runtime'
+        stop_server || return 1
+        SERVER="$CPU_SERVER"; GPU_LAYERS=0  # prompt lookup stays on: it never changes output
+        start_server_once; return $?
+    fi
+    return 1
+}
+
+case "${1:-}" in
+    --version|-v|-V) echo 1.1.0 ;;
+    profiles) cat "$PROFILE_FILE" ;;
+    start) start_server ;;
+    stop) stop_server ;;
+    status) show_status ;;
+    logs) [[ -f "$LOG_FILE" ]] && tail -n 80 "$LOG_FILE" || { echo "No Qwen server log yet: $LOG_FILE"; exit 1; } ;;
+    *) echo "Usage: qwen-server {start|stop|status|logs}" >&2; exit 2 ;;
+esac

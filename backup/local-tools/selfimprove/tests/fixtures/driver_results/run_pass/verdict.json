@@ -1,0 +1,38 @@
+{
+  "verdict": "pass",
+  "typecheck_enabled": false,
+  "jobs": [
+    {
+      "attempt": 1,
+      "prompt_tokens": 300,
+      "output_lines": 10,
+      "verdict": "pass",
+      "model_seconds": 5.2,
+      "typecheck_exit_code": null
+    },
+    {
+      "attempt": 2,
+      "prompt_tokens": 800,
+      "output_lines": 30,
+      "verdict": "fail",
+      "model_seconds": 12.0,
+      "typecheck_exit_code": null
+    },
+    {
+      "attempt": 3,
+      "prompt_tokens": 1500,
+      "output_lines": 75,
+      "verdict": "pass",
+      "model_seconds": 25.1,
+      "typecheck_exit_code": null
+    },
+    {
+      "attempt": 4,
+      "prompt_tokens": 2500,
+      "output_lines": 120,
+      "verdict": "fail",
+      "model_seconds": 45.0,
+      "typecheck_exit_code": null
+    }
+  ]
+}

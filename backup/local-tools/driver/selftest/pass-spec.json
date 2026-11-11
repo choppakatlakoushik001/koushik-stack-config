@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "repo": "/home/chopp/local-llm/driver/selftest/pass",
+  "base_commit": "d0d8001181f4034e4b8bb11b1dc61a95d459fffe",
+  "allowed_paths": [
+    "calc.py"
+  ],
+  "line_ranges": {
+    "calc.py": [
+      {
+        "start": 1,
+        "end": 2
+      }
+    ],
+    "tests/test_calc.py": [
+      {
+        "start": 1,
+        "end": 6
+      }
+    ]
+  },
+  "test_command": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_calc.py",
+    "-q"
+  ],
+  "acceptance": "Change add_one so it returns its input plus one.",
+  "token_estimate": 3000
+}

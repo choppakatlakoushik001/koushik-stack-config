@@ -1,0 +1,3 @@
+# Allowlist for synthetic test fixtures
+* fixtures_fake.py Synthetic fake secrets used exclusively as test fixtures
+* test_leakscan.py Synthetic fake test assertions and unit tests

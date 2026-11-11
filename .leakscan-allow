@@ -1,1 +1,14 @@
-high-entropy-token home/.local/bin/kunchen-launch Reviewed: terminal type default, not a credential
+high-entropy-token backup/launchers/kunchen-launch Reviewed line 13: terminal type default, not a credential
+high-entropy-token backup/launchers/qwen-server Reviewed line 4: local model filename, not a credential
+high-entropy-token backup/launchers/qwen-chat Reviewed line 3: local model filename, not a credential
+high-entropy-token backup/local-tools/docs/README.md Reviewed line 3: model names, not credentials
+high-entropy-token backup/local-tools/leakscan/test_precision.py Reviewed line 15: synthetic scanner test
+phone-number backup/local-tools/leakscan/test_precision.py Reviewed line 16: synthetic scanner test
+high-entropy-token backup/local-tools/selfimprove/bgapps.py Reviewed lines 238,347,349: model names and stable identifiers
+high-entropy-token backup/local-tools/selfimprove/hub_adapters.py Reviewed lines 629,725,748,755: model names and stable identifiers
+high-entropy-token backup/local-tools/selfimprove/si.py Reviewed line 263: model name
+high-entropy-token backup/local-tools/selfimprove/tests/fixtures/hf_models_fixture.json Reviewed lines 3,10,14,20,34,40: synthetic model identifiers
+high-entropy-token backup/local-tools/selfimprove/tests/fixtures/hub_fixtures.json Reviewed lines 4,10,40,46,54,92,102: synthetic model identifiers
+high-entropy-token backup/local-tools/selfimprove/tests/test_bgapps.py Reviewed lines 76,128: synthetic model identifiers
+high-entropy-token backup/local-tools/selfimprove/tests/test_hub_adapters.py Reviewed lines 110,111: synthetic model identifiers
+high-entropy-token backup/local-tools/selfimprove/tests/test_models_scan.py Reviewed lines 56,61,62,63,98,99,101,109,117,119,120,125,199,276,282,283,293,386,415: synthetic model identifiers and digests

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+MODEL="$HOME/local-llm/models/Qwen2.5-Coder-3B-Instruct/qwen2.5-coder-3b-instruct-q4_k_m.gguf"
+CLI="$HOME/local-llm/llama.cpp/src/build/bin/llama-cli"
+[[ -x "$CLI" ]] || { echo "llama-cli is missing: $CLI" >&2; exit 1; }
+[[ -r "$MODEL" ]] || { echo "Qwen model is missing: $MODEL" >&2; exit 1; }
+args=(--model "$MODEL" --threads 4 --ctx-size 4096 --load-mode mmap --simple-io)
+if [[ -t 0 ]]; then
+    exec "$CLI" "${args[@]}" "$@"
+else
+    prompt=$(cat)
+    exec "$CLI" "${args[@]}" --single-turn --prompt "$prompt" "$@"
+fi
