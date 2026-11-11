@@ -1,15 +1,9 @@
 # Koushik Stack configuration backup
 
-This snapshot contains the reviewed, non-secret configuration needed to reconstruct the terminal and shared CLI setup.
-The intended destination is the private repository `choppakatlakoushik001/koushik-stack-config`, but no repository or remote has been created yet.
+This private repository is my backup of the terminal, editor, launcher, and shared instruction files used by my local setup.
+The files keep the same names and content as their local copies; `kunchen` and `kunchenguid` stay unchanged.
 
-## Snapshot state
-
-- This is a pre-rename snapshot.
-- The current launcher files still use their existing `kunchen-*` names and `kunchen` session identifiers.
-- The separate `kunchen` to `koushik` migration is intentionally deferred until a quiet window with no live workers.
-- The upstream account name `kunchenguid` is an external identity and must never be renamed.
-- No scheduled publishing or unattended push is included.
+No scheduled publishing or unattended push is included.
 
 ## Restore map
 
@@ -27,6 +21,7 @@ Paths under `home/` are relative to the Linux home directory:
 | `home/.gemini/GEMINI.md` | `~/.gemini/GEMINI.md` |
 | `home/.qwen/QWEN.md` | `~/.qwen/QWEN.md` |
 | `home/local-llm/SHARED-TOOLS.md` | `~/local-llm/SHARED-TOOLS.md` |
+| `home/local-llm/TASK-LISTS.md` | `~/local-llm/TASK-LISTS.md` |
 | `windows/AppData/Roaming/alacritty/alacritty.toml` | `%APPDATA%\\alacritty\\alacritty.toml` |
 
 The Windows Start Menu shortcut and the full shell startup file are excluded.
@@ -44,4 +39,4 @@ Only the reviewed source configuration is retained.
 `MANIFEST.sha256` records a SHA-256 checksum for every snapshot file except the manifest itself.
 SHA-256 is a content fingerprint: if one byte changes, the recorded value changes.
 
-Before any publication, run the local leak scanner against the exact snapshot, inspect the full diff and file list, and require the configured approval gate.
+Before publishing changes, I verify the checksums and scan the exact snapshot for secrets and personal data.
