@@ -14,7 +14,7 @@ Treat `/home/chopp/kunchen/axi` as the AXI workspace. Whenever a task matches an
 
 When the user says `update to latest version`, treat that phrase as standing authorization to update already-present, eligible Kunchen source clones under this workflow. Rediscover and revalidate every target on every invocation; never rely on a stale inventory.
 
-- Limit scope to canonical clones whose authoritative remote identity is exactly `github.com/kunchenguid/<name>`, normalizing only the transport syntax and optional `.git` suffix. Exclude `neural-network`, every other owner or host, mirrors and caches, and every path inside `.treehouse/`; never traverse or touch those task worktrees.
+- Limit scope to canonical clones whose authoritative remote identity is exactly `github.com/kunchenguid/<name>`, normalizing only the transport syntax and optional `.git` suffix. Exclude `main-project`, every other owner or host, mirrors and caches, and every path inside `.treehouse/`; never traverse or touch those task worktrees.
 - Before mutation, report each candidate's path, authoritative remote, checked-out branch, clean or dirty state, in-progress Git operation, upstream, locally known divergence, and planned update handler.
 - Use guarded fast-forward updates only. Never force, reset, stash, switch or checkout over work, create merge commits, overwrite, delete, replace, or auto-repair any clone or installed tool.
 - Skip and report a clone if it is dirty, including untracked files; detached; locally ahead or diverged; mid-merge, rebase, cherry-pick, revert, or bisect; on an unexpected branch; missing an unambiguous upstream; or configured with an unexpected or ambiguous authoritative remote. Do not fix any of these conditions during this workflow.
@@ -33,11 +33,11 @@ Surface the guardian's exact preview and blocking question to the user, retain t
 After that approval, have the guardian revalidate the fingerprint and execute the approved stage, commit, and push without seeking a second conversational approval; any separate sandbox permission needed for those exact operations must be established before the preview.
 Do not stage, commit, or push in the parent agent while the guardian workflow is active.
 
-## Default `neural-network` push workflow
+## Default `main-project` push workflow
 
-When the user gives a bare `push` request, treat the Git worktree associated with the accessible window or tab named `neural-network` as the default target.
+When the user gives a bare `push` request, treat the Git worktree associated with the accessible window or tab named `main-project` as the default target.
 
-- Search accessible windows and tabs for `neural-network` again on every request; never reuse a stale window-to-repository mapping. If there is no unique accessible match, stop and ask the user instead of guessing or publishing another repository.
+- Search accessible windows and tabs for `main-project` again on every request; never reuse a stale window-to-repository mapping. If there is no unique accessible match, stop and ask the user instead of guessing or publishing another repository.
 - Have the `push_guardian` resolve and verify the matched repository root, branch, and remote before preparing its exact-snapshot preview. The standing workflow is not advance approval to stage, commit, or push.
 - Before the preview, inspect the target repository instructions, relevant Python source, the rest of the codebase, working-tree diff, and relevant history.
   Also inspect the relevant accessible Claude window conversation for project intent, decisions, debugging context, and open questions.

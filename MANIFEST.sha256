@@ -3,7 +3,7 @@
 fb8498d418183e50cb7a662b407ebed3aa232c10b4c66b57660fc576f5db5ef8  ./backup/editor/nvim/init.lua
 2410f50548e4f82554335bf2fdade67662a99961c5c64c9b668ac8e5a9b82ec9  ./backup/editor/nvim/lazy-lock.json
 d925a2df3124975b2e42755e4029d12e6cb9cf288041af783f76a410459f8a69  ./backup/instructions/claude/CLAUDE.md
-9b4f631a46fea1f8e5f26d27fb04d390e8d8ae3f56a7da0364ded7174a5a0059  ./backup/instructions/codex/AGENTS.md
+75948d2a37dfa6e71abbbf67838b896f374c000e334c4db7e64dc02f5c9a28d4  ./backup/instructions/codex/AGENTS.md
 5021cbd09e3110c5be8fd90b81ddd0ea7466713120e62706fc4bbbed204755df  ./backup/instructions/gemini/GEMINI.md
 842fe146250c7decaf4dccb79e334c75774749c68324f0a3781fa6a1b72c5b01  ./backup/instructions/qwen/QWEN.md
 5b9026a096d8f75b080557924c04805258ca4d6008228b37487049f0b369eb23  ./backup/launchers/kunchen-launch
@@ -18,7 +18,7 @@ c5139d5b7692269fa6c4cb9a6c735dd36e02c0bada5f2d97e1da969b4daff940  ./backup/local
 46d33dfb3169d2c70ef37717bfa372618a18ba6467d65a82fdcf393cb5852054  ./backup/local-tools/cleaner/clean.py
 85479a68164aa87b3836114ede7f6646bbfc7a0b9a1eff23459b5336ffc3468d  ./backup/local-tools/cleaner/test_clean.py
 a63e7057773bfc1014e9492729a622c89bd19b96ee2409de595ac7582b9c5fc7  ./backup/local-tools/docs/README.md
-c675d236bd90cc3b0ee541ad4f6717fa71c3e5687b97fb395b6578d956e5ac60  ./backup/local-tools/docs/SHARED-TOOLS.md
+4e68c7e23cf8e88548b6a7f7f8cea3675f3bb73879e6df6ee32f5510584ea9e6  ./backup/local-tools/docs/SHARED-TOOLS.md
 3eb06fd2186decae5661a7e20de9e11334ed574a1e3656c90b20d2c246685bc9  ./backup/local-tools/docs/TASK-LISTS.md
 a967aabefafff1485ed90b1e43696a49a549d4c74fa2f978c75ef9bca81ddc8d  ./backup/local-tools/driver/.gitignore
 56fa05216a37698b55f0afd216b750206eacb5451b1b60452b5f5ea938796473  ./backup/local-tools/driver/README.md

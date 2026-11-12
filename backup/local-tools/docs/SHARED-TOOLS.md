@@ -29,7 +29,7 @@ Curated from what this setup learned; Firstmate's weekly self-improvement loop a
 - Before merging or landing any change, run `python3 ~/local-llm/leakscan/leakscan.py diff <repo> <base> HEAD` (exit 0 = clean).
 - Recommend only changes that are never slower than today; prefer additive fallbacks and work that runs while the captain is idle.
 - Never kill processes by name or pattern (`pkill`, `killall`); the captain's live editor runs here. Kill only process IDs you started.
-- On the captain's own hand-coded projects (neural-network / QEC thesis), give hints and concepts only; never edit his files unless he says to.
+- On the captain's own hand-coded projects (main project), give hints and concepts only; never edit his files unless he says to.
 - Small local models: success per line compounds (per-line success p over N lines gives about p^N), so give them narrow single-file jobs; the driver's defaults (whole-function replies, type-check only changed code) passed 10/10 vs 1/10 for patch replies.
 - Tests must never write to live logs or records (hints, proposals, status); point them at a temporary copy, or real trial data gets polluted and weekly decisions go wrong.
 
